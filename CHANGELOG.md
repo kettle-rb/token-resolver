@@ -30,6 +30,19 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Security
 
-## [0.1.0] - 2026-02-21
+## [1.0.0] - 2026-02-21
+
+- TAG: [v1.0.0][1.0.0t]
+- COVERAGE: 97.67% -- 252/258 lines in 10 files
+- BRANCH COVERAGE: 89.39% -- 59/66 branches in 10 files
+- 96.72% documented
+
+### Added
 
 - Initial release
+
+### Security
+
+[Unreleased]: https://github.com/kettle-rb/token-resolver/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/kettle-rb/ast-merge/compare/e0e299cad6e6914d512845c71df6b7ac8009e5ac...v1.0.0
+[1.0.0t]: https://github.com/kettle-rb/ast-merge/tags/v1.0.0
