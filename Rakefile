@@ -81,7 +81,7 @@ begin
 
   Rake::Task[:coverage].clear if Rake::Task.task_defined?(:coverage)
   desc("Slap magic onto the main coverage task")
-  task(:coverage => [:magic])
+  task(coverage: [:magic])
 rescue LoadError
   desc("(stub) spec is unavailable")
   task(:spec) do # rubocop:disable Rake/DuplicateTask
