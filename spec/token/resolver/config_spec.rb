@@ -61,7 +61,7 @@ RSpec.describe Token::Resolver::Config do
       config = described_class.new
       expect(config.pre).to be_frozen
       expect(config.post).to be_frozen
-      config.separators.each { |s| expect(s).to be_frozen }
+      expect(config.separators).to all(be_frozen)
     end
   end
 

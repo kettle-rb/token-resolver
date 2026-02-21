@@ -65,11 +65,13 @@ module Token
         freeze
       end
 
-      # Default config suitable for kettle-jem style tokens like {KJ|GEM_NAME}.
-      #
-      # @return [Config]
-      def self.default
-        @default ||= new
+      class << self
+        # Default config suitable for kettle-jem style tokens like {KJ|GEM_NAME}.
+        #
+        # @return [Config]
+        def default
+          @default ||= new # rubocop:disable ThreadSafety/ClassInstanceVariable
+        end
       end
 
       # Equality based on all attributes.
@@ -124,7 +126,7 @@ module Token
 
         if max_segments
           raise ArgumentError, "max_segments must be a positive Integer" unless max_segments.is_a?(Integer) && max_segments >= 1
-          raise ArgumentError, "max_segments (#{max_segments}) must be >= min_segments (#{min_segments})" unless max_segments >= min_segments
+          raise ArgumentError, "max_segments (#{max_segments}) must be >= min_segments (#{min_segments})" if max_segments < min_segments
         end
       end
     end

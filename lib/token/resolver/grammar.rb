@@ -21,7 +21,8 @@ module Token
     class Grammar
       # Cache of built parser classes, keyed by Config.
       # Config is frozen and implements #hash/#eql?, so this is safe.
-      @cache = {}
+      # NOTE: This hash is mutated under mutex in .build; it cannot actually be frozen.
+      @cache = {} # rubocop:disable ThreadSafety/MutableClassInstanceVariable
       @cache_mutex = Mutex.new
 
       class << self

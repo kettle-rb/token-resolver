@@ -78,12 +78,7 @@ module Token
         end
 
         def slice_to_s(value)
-          case value
-          when Parslet::Slice
-            value.to_s
-          else
-            value.to_s
-          end
+          value.to_s
         end
 
         def coalesce(nodes)

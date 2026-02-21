@@ -36,7 +36,7 @@ Detects structured tokens like `{KJ|GEM_NAME}` in any file format and resolves t
 # One-liner: parse and resolve
 result = Token::Resolver.resolve(
   "Hello {KJ|NAME}, welcome to {KJ|PROJECT}!",
-  {"KJ|NAME" => "World", "KJ|PROJECT" => "my-app"}
+  {"KJ|NAME" => "World", "KJ|PROJECT" => "my-app"},
 )
 # => "Hello World, welcome to my-app!"
 ```
@@ -180,7 +180,7 @@ doc.text_only?  # => false
 # Resolve tokens
 result = Token::Resolver.resolve(
   "Deploy {KJ|GEM_NAME} to {KJ|GH_ORG}",
-  {"KJ|GEM_NAME" => "my-gem", "KJ|GH_ORG" => "my-org"}
+  {"KJ|GEM_NAME" => "my-gem", "KJ|GH_ORG" => "my-org"},
 )
 # => "Deploy my-gem to my-org"
 ```

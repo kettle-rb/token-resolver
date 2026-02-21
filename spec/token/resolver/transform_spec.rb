@@ -26,10 +26,14 @@ RSpec.describe Token::Resolver::Transform do
     it "converts token entries to Token nodes" do
       # Simulate what parslet produces for a token
       tree = [
-        {token: {seg: [
-          Parslet::Slice.new(Parslet::Position.new("KJ", 0), "KJ"),
-          Parslet::Slice.new(Parslet::Position.new("NAME", 0), "NAME"),
-        ]}},
+        {
+          token: {
+            seg: [
+              Parslet::Slice.new(Parslet::Position.new("KJ", 0), "KJ"),
+              Parslet::Slice.new(Parslet::Position.new("NAME", 0), "NAME"),
+            ],
+          },
+        },
       ]
       nodes = described_class.apply(tree, config)
       expect(nodes.length).to eq(1)
@@ -40,10 +44,14 @@ RSpec.describe Token::Resolver::Transform do
     it "handles mixed text and token entries" do
       tree = [
         {text: Parslet::Slice.new(Parslet::Position.new("A", 0), "A")},
-        {token: {seg: [
-          Parslet::Slice.new(Parslet::Position.new("X", 0), "X"),
-          Parslet::Slice.new(Parslet::Position.new("Y", 0), "Y"),
-        ]}},
+        {
+          token: {
+            seg: [
+              Parslet::Slice.new(Parslet::Position.new("X", 0), "X"),
+              Parslet::Slice.new(Parslet::Position.new("Y", 0), "Y"),
+            ],
+          },
+        },
         {text: Parslet::Slice.new(Parslet::Position.new("B", 0), "B")},
       ]
       nodes = described_class.apply(tree, config)

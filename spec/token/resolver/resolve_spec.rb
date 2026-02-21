@@ -120,7 +120,7 @@ RSpec.describe Token::Resolver::Resolve do
       end
     end
 
-    context "accepting a node array directly" do
+    context "with a node array directly" do
       it "works with an array of nodes" do
         nodes = [
           Token::Resolver::Node::Text.new("Hi "),
