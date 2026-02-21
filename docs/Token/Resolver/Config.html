@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Token::Resolver::Config
+  
+    &mdash; Documentation by YARD 0.9.38
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Token::Resolver::Config";
+  relpath = '../../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../../_index.html">Index (C)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../Token.html" title="Token (module)">Token</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Resolver.html" title="Token::Resolver (module)">Resolver</a></span></span>
+     &raquo; 
+    <span class="title">Config</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Token::Resolver::Config
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Token::Resolver::Config</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/token/resolver/config.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Configuration object defining the token structure for parsing.</p>
+
+<p>A Config describes what tokens look like: their opening/closing delimiters,<br />
+segment separators, and segment count constraints. Configs are frozen after<br />
+initialization and implement #hash/#eql? for grammar caching.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+        <h5 class="example_title"><div class='inline'><table>
+  <tbody>
+    <tr>
+      <td>Default config (tokens like       <td>Y)</td>
+    </tr>
+  </tbody>
+</table>
+</div></h5>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_config'>config</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Token.html" title="Token (module)">Token</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Resolver.html" title="Token::Resolver (module)">Resolver</a></span></span><span class='op'>::</span><span class='const'>Config</span><span class='period'>.</span><span class='id identifier rubyid_default'><span class='object_link'><a href="#default-class_method" title="Token::Resolver::Config.default (method)">default</a></span></span>
+<span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_pre'>pre</span>          <span class='comment'># =&gt; &quot;{&quot;
+</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_post'>post</span>         <span class='comment'># =&gt; &quot;}&quot;
+</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_separators'>separators</span>   <span class='comment'># =&gt; [&quot;|&quot;]
+</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_min_segments'>min_segments</span> <span class='comment'># =&gt; 2</span></code></pre>
+    
+      
+        <h5 class="example_title"><div class='inline'><p>Custom config (tokens like «X:Y»)</p>
+</div></h5>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_config'>config</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Token.html" title="Token (module)">Token</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Resolver.html" title="Token::Resolver (module)">Resolver</a></span></span><span class='op'>::</span><span class='const'>Config</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Token::Resolver::Config#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+  <span class='label'>pre:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&lt;&lt;</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='label'>post:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&gt;&gt;</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='label'>separators:</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>:</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+<span class='rparen'>)</span></code></pre>
+    
+      
+        <h5 class="example_title"><div class='inline'><table>
+  <tbody>
+    <tr>
+      <td>Multi-separator config (tokens like       <td>SECTION:NAME)</td>
+    </tr>
+  </tbody>
+</table>
+</div></h5>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_config'>config</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Token.html" title="Token (module)">Token</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Resolver.html" title="Token::Resolver (module)">Resolver</a></span></span><span class='op'>::</span><span class='const'>Config</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Token::Resolver::Config#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+  <span class='label'>separators:</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>|</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>:</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+<span class='rparen'>)</span>
+<span class='comment'># First boundary uses &quot;|&quot;, second uses &quot;:&quot;, rest repeat &quot;:&quot;</span></code></pre>
+    
+  </div>
+
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#max_segments-instance_method" title="#max_segments (instance method)">#<strong>max_segments</strong>  &#x21d2; Integer<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Maximum number of segments (nil = unlimited).</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#min_segments-instance_method" title="#min_segments (instance method)">#<strong>min_segments</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Minimum number of segments for a valid token.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#post-instance_method" title="#post (instance method)">#<strong>post</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Closing delimiter for tokens.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pre-instance_method" title="#pre (instance method)">#<strong>pre</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Opening delimiter for tokens.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#separators-instance_method" title="#separators (instance method)">#<strong>separators</strong>  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Separators between segments (used sequentially; last repeats).</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default-class_method" title="default (class method)">.<strong>default</strong>  &#x21d2; Config </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><table>
+  <tbody>
+    <tr>
+      <td>Default config suitable for kettle-jem style tokens like       <td>GEM_NAME.</td>
+    </tr>
+  </tbody>
+</table>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#eql%3F-instance_method" title="#eql? (instance method)">#<strong>eql?</strong>(other)  &#x21d2; Boolean </a>
+    
+
+    
+      (also: #==)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Equality based on all attributes.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#hash-instance_method" title="#hash (instance method)">#<strong>hash</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Hash based on all attributes (for use as Hash key / grammar cache).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(pre: &quot;{&quot;, post: &quot;}&quot;, separators: [&quot;|&quot;], min_segments: 2, max_segments: nil)  &#x21d2; Config </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create a new Config.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#separator_at-instance_method" title="#separator_at (instance method)">#<strong>separator_at</strong>(index)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Get the separator for a given boundary index.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(pre: &quot;{&quot;, post: &quot;}&quot;, separators: [&quot;|&quot;], min_segments: 2, max_segments: nil)  &#x21d2; <tt><span class='object_link'><a href="" title="Token::Resolver::Config (class)">Config</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create a new Config.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>pre</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&quot;{&quot;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>Opening delimiter (default: “{“)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>post</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&quot;}&quot;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>Closing delimiter (default: “}”)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>separators</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>[&quot;|&quot;]</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><table>
+  <tbody>
+    <tr>
+      <td>Segment separators (default: [”</td>
+      <td>”])</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>min_segments</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>2</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>Minimum segment count (default: 2)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>max_segments</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>, <tt>nil</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>Maximum segment count (default: nil)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>ArgumentError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>If any delimiter is empty or constraints are invalid</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/token/resolver/config.rb', line 56</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>pre:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>{</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>post:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>separators:</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>|</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>min_segments:</span> <span class='int'>2</span><span class='comma'>,</span> <span class='label'>max_segments:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_validate!'>validate!</span><span class='lparen'>(</span><span class='id identifier rubyid_pre'>pre</span><span class='comma'>,</span> <span class='id identifier rubyid_post'>post</span><span class='comma'>,</span> <span class='id identifier rubyid_separators'>separators</span><span class='comma'>,</span> <span class='id identifier rubyid_min_segments'>min_segments</span><span class='comma'>,</span> <span class='id identifier rubyid_max_segments'>max_segments</span><span class='rparen'>)</span>
+
+  <span class='ivar'>@pre</span> <span class='op'>=</span> <span class='id identifier rubyid_pre'>pre</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
+  <span class='ivar'>@post</span> <span class='op'>=</span> <span class='id identifier rubyid_post'>post</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
+  <span class='ivar'>@separators</span> <span class='op'>=</span> <span class='id identifier rubyid_separators'>separators</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_s'>s</span><span class='op'>|</span> <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
+  <span class='ivar'>@min_segments</span> <span class='op'>=</span> <span class='id identifier rubyid_min_segments'>min_segments</span>
+  <span class='ivar'>@max_segments</span> <span class='op'>=</span> <span class='id identifier rubyid_max_segments'>max_segments</span>
+
+  <span class='id identifier rubyid_freeze'>freeze</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="max_segments-instance_method">
+  
+    #<strong>max_segments</strong>  &#x21d2; <tt>Integer</tt><sup>?</sup>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Maximum number of segments (nil = unlimited).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Maximum number of segments (nil = unlimited)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+45
+46
+47</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/token/resolver/config.rb', line 45</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_max_segments'>max_segments</span>
+  <span class='ivar'>@max_segments</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="min_segments-instance_method">
+  
+    #<strong>min_segments</strong>  &#x21d2; <tt>Integer</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Minimum number of segments for a valid token.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Minimum number of segments for a valid token</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+42
+43
+44</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/token/resolver/config.rb', line 42</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_min_segments'>min_segments</span>
+  <span class='ivar'>@min_segments</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="post-instance_method">
+  
+    #<strong>post</strong>  &#x21d2; <tt>String</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Closing delimiter for tokens.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Closing delimiter for tokens</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+36
+37
+38</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/token/resolver/config.rb', line 36</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_post'>post</span>
+  <span class='ivar'>@post</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="pre-instance_method">
+  
+    #<strong>pre</strong>  &#x21d2; <tt>String</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Opening delimiter for tokens.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Opening delimiter for tokens</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+33
+34
+35</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/token/resolver/config.rb', line 33</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_pre'>pre</span>
+  <span class='ivar'>@pre</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="separators-instance_method">
+  
+    #<strong>separators</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Separators between segments (used sequentially; last repeats).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Separators between segments (used sequentially; last repeats)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+39
+40
+41</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/token/resolver/config.rb', line 39</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_separators'>separators</span>
+  <span class='ivar'>@separators</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="default-class_method">
+  
+    .<strong>default</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Token::Resolver::Config (class)">Config</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <table>
+  <tbody>
+    <tr>
+      <td>Default config suitable for kettle-jem style tokens like       <td>GEM_NAME.</td>
+    </tr>
+  </tbody>
+</table>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Token::Resolver::Config (class)">Config</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+71
+72
+73</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/token/resolver/config.rb', line 71</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span>
+  <span class='ivar'>@default</span> <span class='op'>||=</span> <span class='id identifier rubyid_new'>new</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="eql?-instance_method">
+  
+    #<strong>eql?</strong>(other)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='==-instance_method'>==</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Equality based on all attributes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>other</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+79
+80
+81
+82
+83
+84
+85
+86
+87</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/token/resolver/config.rb', line 79</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_eql?'>eql?</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="" title="Token::Resolver::Config (class)">Config</a></span></span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_pre'>pre</span> <span class='op'>==</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_pre'>pre</span> <span class='op'>&amp;&amp;</span>
+    <span class='id identifier rubyid_post'>post</span> <span class='op'>==</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_post'>post</span> <span class='op'>&amp;&amp;</span>
+    <span class='id identifier rubyid_separators'>separators</span> <span class='op'>==</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_separators'>separators</span> <span class='op'>&amp;&amp;</span>
+    <span class='id identifier rubyid_min_segments'>min_segments</span> <span class='op'>==</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_min_segments'>min_segments</span> <span class='op'>&amp;&amp;</span>
+    <span class='id identifier rubyid_max_segments'>max_segments</span> <span class='op'>==</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_max_segments'>max_segments</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="hash-instance_method">
+  
+    #<strong>hash</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Hash based on all attributes (for use as Hash key / grammar cache).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+94
+95
+96</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/token/resolver/config.rb', line 94</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_hash'>hash</span>
+  <span class='lbracket'>[</span><span class='id identifier rubyid_pre'>pre</span><span class='comma'>,</span> <span class='id identifier rubyid_post'>post</span><span class='comma'>,</span> <span class='id identifier rubyid_separators'>separators</span><span class='comma'>,</span> <span class='id identifier rubyid_min_segments'>min_segments</span><span class='comma'>,</span> <span class='id identifier rubyid_max_segments'>max_segments</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_hash'>hash</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="separator_at-instance_method">
+  
+    #<strong>separator_at</strong>(index)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Get the separator for a given boundary index.</p>
+
+<p>When there are more segment boundaries than separators, the last separator repeats.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>index</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Zero-based boundary index</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The separator to use</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+104
+105
+106
+107
+108
+109
+110</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/token/resolver/config.rb', line 104</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_separator_at'>separator_at</span><span class='lparen'>(</span><span class='id identifier rubyid_index'>index</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_index'>index</span> <span class='op'>&lt;</span> <span class='id identifier rubyid_separators'>separators</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span>
+    <span class='id identifier rubyid_separators'>separators</span><span class='lbracket'>[</span><span class='id identifier rubyid_index'>index</span><span class='rbracket'>]</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_separators'>separators</span><span class='period'>.</span><span class='id identifier rubyid_last'>last</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Sat Feb 21 05:19:21 2026 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.38 (ruby-4.0.1).
+</div>
+
+    </div>
+  </body>
+</html>
