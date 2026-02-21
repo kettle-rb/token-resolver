@@ -157,13 +157,13 @@ NOTE: Be prepared to track down certs for signed gems and add them the same way 
 
 ### Token Config Options
 
-| Option | Default | Description |
-|--------|---------|-------------|
-| `pre` | `"{"` | Opening delimiter |
-| `post` | `"}"` | Closing delimiter |
-| `separators` | `["\|"]` | Segment separators (sequential; last repeats) |
-| `min_segments` | `2` | Minimum segments for a valid token |
-| `max_segments` | `nil` | Maximum segments (`nil` = unlimited) |
+| Option         | Default             | Description                                   |
+|----------------|---------------------|-----------------------------------------------|
+| `pre`          | `"{"`               | Opening delimiter                             |
+| `post`         | `"}"`               | Closing delimiter                             |
+| `separators`   | `["&#124;"]` (pipe) | Segment separators (sequential; last repeats) |
+| `min_segments` | `2`                 | Minimum segments for a valid token            |
+| `max_segments` | `nil`               | Maximum segments (`nil` = unlimited)          |
 
 ## 🔧 Basic Usage
 
