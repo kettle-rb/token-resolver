@@ -57,14 +57,14 @@ In contrast, `String#gsub` just does a simple regex replacement with minimal all
 
 **Input Size**: 41 bytes | **Token Count**: 2
 
-| Approach | Iterations/Second | Time per Iteration |
-|----------|-------------------|-------------------|
-| Kernel#sprintf | 991.8k ±1.6% | 1.01µs |
-| String#gsub | 163.5k ±1.7% | 6.12µs |
-| token-resolver | 523.7 ±2.9% | 1909.53µs |
+| Approach       | Iterations/Second | Time per Iteration |
+|----------------|-------------------|--------------------|
+| Kernel#sprintf | 991.8k ±1.6%      | 1.01µs             |
+| String#gsub    | 163.5k ±1.7%      | 6.12µs             |
+| token-resolver | 523.7 ±2.9%       | 1909.53µs          |
 
-**Comparison**: `String#gsub` is **312x slower** than `token-resolver`.
-**Comparison**: `Kernel#sprintf` is **1894x slower** than `token-resolver`.
+**Comparison**: `token-resolver` is **312x slower** than `String#gsub`.
+**Comparison**: `token-resolver` is **1894x slower** than `Kernel#sprintf`.
 
 ### 2. Moderate Complexity (7 tokens)
 
@@ -72,14 +72,14 @@ In contrast, `String#gsub` just does a simple regex replacement with minimal all
 
 **Input Size**: 123 bytes | **Token Count**: 7
 
-| Approach | Iterations/Second | Time per Iteration |
-|----------|-------------------|-------------------|
-| Kernel#sprintf | 521.8k ±0.6% | 1.92µs |
-| String#gsub | 62.4k ±1.2% | 16.03µs |
-| token-resolver | 193.2 ±1.6% | 5176.46µs |
+| Approach       | Iterations/Second | Time per Iteration |
+|----------------|-------------------|--------------------|
+| Kernel#sprintf | 521.8k ±0.6%      | 1.92µs             |
+| String#gsub    | 62.4k ±1.2%       | 16.03µs            |
+| token-resolver | 193.2 ±1.6%       | 5176.46µs          |
 
-**Comparison**: `String#gsub` is **323x slower** than `token-resolver`.
-**Comparison**: `Kernel#sprintf` is **2701x slower** than `token-resolver`.
+**Comparison**: `token-resolver` is **323x slower** than `String#gsub`.
+**Comparison**: `token-resolver` is **2701x slower** than `Kernel#sprintf`.
 
 ### 3. High Complexity (20 tokens)
 
@@ -87,14 +87,14 @@ In contrast, `String#gsub` just does a simple regex replacement with minimal all
 
 **Input Size**: 278 bytes | **Token Count**: 22
 
-| Approach | Iterations/Second | Time per Iteration |
-|----------|-------------------|-------------------|
-| Kernel#sprintf | 197.3k ±2.7% | 5.07µs |
-| String#gsub | 18.4k ±1.2% | 54.44µs |
-| token-resolver | 85.8 ±1.2% | 11658.8µs |
+| Approach       | Iterations/Second | Time per Iteration |
+|----------------|-------------------|--------------------|
+| Kernel#sprintf | 197.3k ±2.7%      | 5.07µs             |
+| String#gsub    | 18.4k ±1.2%       | 54.44µs            |
+| token-resolver | 85.8 ±1.2%        | 11658.8µs          |
 
-**Comparison**: `String#gsub` is **214x slower** than `token-resolver`.
-**Comparison**: `Kernel#sprintf` is **2301x slower** than `token-resolver`.
+**Comparison**: `token-resolver` is **214x slower** than `String#gsub`.
+**Comparison**: `token-resolver` is **2301x slower** than `Kernel#sprintf`.
 
 ### 4. Large Document with Sparse Tokens (5 tokens in 1KB text)
 
@@ -107,7 +107,7 @@ In contrast, `String#gsub` just does a simple regex replacement with minimal all
 | String#gsub | 67.7k ±2.0% | 14.78µs |
 | token-resolver | 20.8 ±0.0% | 48080.19µs |
 
-**Comparison**: `String#gsub` is **3254x slower** than `token-resolver`.
+**Comparison**: `token-resolver` is **3254x slower** than `String#gsub`.
 
 ## Analysis & Recommendations
 
