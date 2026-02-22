@@ -2,9 +2,9 @@
 /pkg/
 /tmp/
 *.gem
+/vendor/
 
 # Bundler
-/vendor/bundle/
 /.bundle/
 /gemfiles/*.lock
 /gemfiles/.bundle/
