@@ -108,8 +108,8 @@ module Token
           unless valid_key_re.match?(key)
             raise ArgumentError,
               "Invalid replacement key: #{key.inspect}. " \
-              "Key segments must match #{config.segment_pattern.inspect} " \
-              "and be separated by one of #{config.separators.inspect}."
+                "Key segments must match #{config.segment_pattern.inspect} " \
+                "and be separated by one of #{config.separators.inspect}."
           end
         end
       end

@@ -281,6 +281,34 @@ initialization and implement #hash/#eql? for grammar caching.</p>
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#segment_pattern-instance_method" title="#segment_pattern (instance method)">#<strong>segment_pattern</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Parslet-compatible character class for segment content.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#separators-instance_method" title="#separators (instance method)">#<strong>separators</strong>  &#x21d2; Array&lt;String&gt; </a>
     
 
@@ -408,7 +436,7 @@ initialization and implement #hash/#eql? for grammar caching.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(pre: &quot;{&quot;, post: &quot;}&quot;, separators: [&quot;|&quot;], min_segments: 2, max_segments: nil)  &#x21d2; Config </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(pre: &quot;{&quot;, post: &quot;}&quot;, separators: [&quot;|&quot;], min_segments: 2, max_segments: nil, segment_pattern: &quot;[A-Za-z0-9_]&quot;)  &#x21d2; Config </a>
     
 
     
@@ -462,7 +490,7 @@ initialization and implement #hash/#eql? for grammar caching.</p>
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(pre: &quot;{&quot;, post: &quot;}&quot;, separators: [&quot;|&quot;], min_segments: 2, max_segments: nil)  &#x21d2; <tt><span class='object_link'><a href="" title="Token::Resolver::Config (class)">Config</a></span></tt> 
+    #<strong>initialize</strong>(pre: &quot;{&quot;, post: &quot;}&quot;, separators: [&quot;|&quot;], min_segments: 2, max_segments: nil, segment_pattern: &quot;[A-Za-z0-9_]&quot;)  &#x21d2; <tt><span class='object_link'><a href="" title="Token::Resolver::Config (class)">Config</a></span></tt> 
   
 
   
@@ -571,6 +599,24 @@ initialization and implement #hash/#eql? for grammar caching.</p>
       
     </li>
   
+    <li>
+      
+        <span class='name'>segment_pattern</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&quot;[A-Za-z0-9_]&quot;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>Parslet match() character class for valid segment<br />
+characters (default: “[A-Za-z0-9_]”)</p>
+</div>
+      
+    </li>
+  
 </ul>
 
 <p class="tag_title">Raises:</p>
@@ -597,22 +643,23 @@ initialization and implement #hash/#eql? for grammar caching.</p>
       <pre class="lines">
 
 
-56
-57
-58
-59
-60
-61
-62
 63
 64
 65
-66</pre>
+66
+67
+68
+69
+70
+71
+72
+73
+74</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/token/resolver/config.rb', line 56</span>
+      <pre class="code"><span class="info file"># File 'lib/token/resolver/config.rb', line 63</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>pre:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>{</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>post:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>separators:</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>|</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>min_segments:</span> <span class='int'>2</span><span class='comma'>,</span> <span class='label'>max_segments:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>pre:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>{</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>post:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>separators:</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>|</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>min_segments:</span> <span class='int'>2</span><span class='comma'>,</span> <span class='label'>max_segments:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>segment_pattern:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[A-Za-z0-9_]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
   <span class='id identifier rubyid_validate!'>validate!</span><span class='lparen'>(</span><span class='id identifier rubyid_pre'>pre</span><span class='comma'>,</span> <span class='id identifier rubyid_post'>post</span><span class='comma'>,</span> <span class='id identifier rubyid_separators'>separators</span><span class='comma'>,</span> <span class='id identifier rubyid_min_segments'>min_segments</span><span class='comma'>,</span> <span class='id identifier rubyid_max_segments'>max_segments</span><span class='rparen'>)</span>
 
   <span class='ivar'>@pre</span> <span class='op'>=</span> <span class='id identifier rubyid_pre'>pre</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
@@ -620,6 +667,7 @@ initialization and implement #hash/#eql? for grammar caching.</p>
   <span class='ivar'>@separators</span> <span class='op'>=</span> <span class='id identifier rubyid_separators'>separators</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_s'>s</span><span class='op'>|</span> <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
   <span class='ivar'>@min_segments</span> <span class='op'>=</span> <span class='id identifier rubyid_min_segments'>min_segments</span>
   <span class='ivar'>@max_segments</span> <span class='op'>=</span> <span class='id identifier rubyid_max_segments'>max_segments</span>
+  <span class='ivar'>@segment_pattern</span> <span class='op'>=</span> <span class='id identifier rubyid_segment_pattern'>segment_pattern</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
 
   <span class='id identifier rubyid_freeze'>freeze</span>
 <span class='kw'>end</span></pre>
@@ -872,6 +920,69 @@ initialization and implement #hash/#eql? for grammar caching.</p>
       
       <span id=""></span>
       <div class="method_details ">
+  <h3 class="signature " id="segment_pattern-instance_method">
+  
+    #<strong>segment_pattern</strong>  &#x21d2; <tt>String</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Parslet-compatible character class for segment content.<br />
+Only characters matching this pattern are valid inside a token segment.<br />
+Default: <code>"[A-Za-z0-9_]"</code> (word characters — no spaces, no operators).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Parslet-compatible character class for segment content.<br />
+Only characters matching this pattern are valid inside a token segment.<br />
+Default: <code>"[A-Za-z0-9_]"</code> (word characters — no spaces, no operators).</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+50
+51
+52</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/token/resolver/config.rb', line 50</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_segment_pattern'>segment_pattern</span>
+  <span class='ivar'>@segment_pattern</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
   <h3 class="signature " id="separators-instance_method">
   
     #<strong>separators</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt>  <span class="extras">(readonly)</span>
@@ -979,12 +1090,12 @@ initialization and implement #hash/#eql? for grammar caching.</p>
       <pre class="lines">
 
 
-72
-73
-74</pre>
+80
+81
+82</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/token/resolver/config.rb', line 72</span>
+      <pre class="code"><span class="info file"># File 'lib/token/resolver/config.rb', line 80</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_default'>default</span>
   <span class='ivar'>@default</span> <span class='op'>||=</span> <span class='id identifier rubyid_new'>new</span> <span class='comment'># rubocop:disable ThreadSafety/ClassInstanceVariable
@@ -1057,18 +1168,19 @@ initialization and implement #hash/#eql? for grammar caching.</p>
       <pre class="lines">
 
 
-81
-82
-83
-84
-85
-86
-87
-88
-89</pre>
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/token/resolver/config.rb', line 81</span>
+      <pre class="code"><span class="info file"># File 'lib/token/resolver/config.rb', line 89</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_eql?'>eql?</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="" title="Token::Resolver::Config (class)">Config</a></span></span><span class='rparen'>)</span>
@@ -1077,7 +1189,8 @@ initialization and implement #hash/#eql? for grammar caching.</p>
     <span class='id identifier rubyid_post'>post</span> <span class='op'>==</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_post'>post</span> <span class='op'>&amp;&amp;</span>
     <span class='id identifier rubyid_separators'>separators</span> <span class='op'>==</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_separators'>separators</span> <span class='op'>&amp;&amp;</span>
     <span class='id identifier rubyid_min_segments'>min_segments</span> <span class='op'>==</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_min_segments'>min_segments</span> <span class='op'>&amp;&amp;</span>
-    <span class='id identifier rubyid_max_segments'>max_segments</span> <span class='op'>==</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_max_segments'>max_segments</span>
+    <span class='id identifier rubyid_max_segments'>max_segments</span> <span class='op'>==</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_max_segments'>max_segments</span> <span class='op'>&amp;&amp;</span>
+    <span class='id identifier rubyid_segment_pattern'>segment_pattern</span> <span class='op'>==</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_segment_pattern'>segment_pattern</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1122,15 +1235,15 @@ initialization and implement #hash/#eql? for grammar caching.</p>
       <pre class="lines">
 
 
-96
-97
-98</pre>
+105
+106
+107</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/token/resolver/config.rb', line 96</span>
+      <pre class="code"><span class="info file"># File 'lib/token/resolver/config.rb', line 105</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_hash'>hash</span>
-  <span class='lbracket'>[</span><span class='id identifier rubyid_pre'>pre</span><span class='comma'>,</span> <span class='id identifier rubyid_post'>post</span><span class='comma'>,</span> <span class='id identifier rubyid_separators'>separators</span><span class='comma'>,</span> <span class='id identifier rubyid_min_segments'>min_segments</span><span class='comma'>,</span> <span class='id identifier rubyid_max_segments'>max_segments</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_hash'>hash</span>
+  <span class='lbracket'>[</span><span class='id identifier rubyid_pre'>pre</span><span class='comma'>,</span> <span class='id identifier rubyid_post'>post</span><span class='comma'>,</span> <span class='id identifier rubyid_separators'>separators</span><span class='comma'>,</span> <span class='id identifier rubyid_min_segments'>min_segments</span><span class='comma'>,</span> <span class='id identifier rubyid_max_segments'>max_segments</span><span class='comma'>,</span> <span class='id identifier rubyid_segment_pattern'>segment_pattern</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_hash'>hash</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1200,16 +1313,16 @@ initialization and implement #hash/#eql? for grammar caching.</p>
       <pre class="lines">
 
 
-106
-107
-108
-109
-110
-111
-112</pre>
+115
+116
+117
+118
+119
+120
+121</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/token/resolver/config.rb', line 106</span>
+      <pre class="code"><span class="info file"># File 'lib/token/resolver/config.rb', line 115</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_separator_at'>separator_at</span><span class='lparen'>(</span><span class='id identifier rubyid_index'>index</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_index'>index</span> <span class='op'>&lt;</span> <span class='id identifier rubyid_separators'>separators</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span>
@@ -1228,7 +1341,7 @@ initialization and implement #hash/#eql? for grammar caching.</p>
 </div>
 
       <div id="footer">
-  Generated on Sat Feb 21 05:58:48 2026 by
+  Generated on Sun Feb 22 03:06:40 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-4.0.1).
 </div>

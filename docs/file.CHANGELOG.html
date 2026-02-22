@@ -68,7 +68,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 and <a href="https://tom.preston-werner.com/2022/05/23/major-version-numbers-are-not-sacred.html">yes</a>, platform and engine support are part of the <a href="https://github.com/semver/semver/issues/716#issuecomment-869336139">public API</a>.<br>
 Please file a bug if you notice a violation of semantic versioning.</p>
 
-<h2 id="unreleased"><a href="https://github.com/kettle-rb/token-resolver/compare/v1.0.0...HEAD">Unreleased</a></h2>
+<h2 id="unreleased"><a href="https://github.com/kettle-rb/token-resolver/compare/v1.0.1...HEAD">Unreleased</a></h2>
 
 <h3 id="added">Added</h3>
 
@@ -82,6 +82,44 @@ Please file a bug if you notice a violation of semantic versioning.</p>
 
 <h3 id="security">Security</h3>
 
+<h2 id="101---2026-02-22">
+<a href="https://github.com/kettle-rb/token-resolver/compare/v1.0.0...v1.0.1">1.0.1</a> - 2026-02-22</h2>
+
+<ul>
+  <li>TAG: <a href="https://github.com/kettle-rb/token-resolver/releases/tag/v1.0.1">v1.0.1</a>
+</li>
+  <li>COVERAGE: 98.13% – 263/268 lines in 10 files</li>
+  <li>BRANCH COVERAGE: 91.18% – 62/68 branches in 10 files</li>
+  <li>96.77% documented</li>
+</ul>
+
+<h3 id="added-1">Added</h3>
+
+<ul>
+  <li>
+<code>Config#segment_pattern</code> option — a parslet character class constraining which characters<br>
+are valid inside token segments (default: <code>"[A-Za-z0-9_]"</code>). This prevents false positive<br>
+token matches against Ruby block parameters (<code>{ |x| expr }</code>), shell variable expansion<br>
+(<code>${VAR:+val}</code>), and other syntax that structurally resembles tokens but contains spaces<br>
+or punctuation in the “segments”.</li>
+  <li>
+<code>Resolve#resolve</code> now validates replacement keys against the config’s <code>segment_pattern</code> and<br>
+raises <code>ArgumentError</code> if a key contains characters that the grammar would never parse.</li>
+</ul>
+
+<h3 id="fixed-1">Fixed</h3>
+
+<ul>
+  <li>
+<strong>False positive token matches</strong> — the grammar previously used <code>any</code> (match any character)<br>
+for segment content, which allowed spaces, operators, and punctuation inside token segments.<br>
+This caused Ruby block syntax like <code>{ |fp| File.exist?(fp) }</code> and shell expansion like<br>
+<code>${CLASSPATH:+:$CLASSPATH}</code> to be incorrectly parsed as tokens. With multi-separator configs<br>
+(<code>["|", ":"]</code>), the second <code>|</code> was reconstructed as <code>:</code> during <code>on_missing: :keep</code><br>
+roundtripping, silently corrupting source files. The grammar now uses<br>
+<code>match(segment_pattern)</code> instead of <code>any</code>, limiting segments to word characters by default.</li>
+</ul>
+
 <h2 id="100---2026-02-21">
 <a href="https://github.com/kettle-rb/ast-merge/compare/e0e299cad6e6914d512845c71df6b7ac8009e5ac...v1.0.0">1.0.0</a> - 2026-02-21</h2>
 
@@ -93,7 +131,7 @@ Please file a bug if you notice a violation of semantic versioning.</p>
   <li>96.72% documented</li>
 </ul>
 
-<h3 id="added-1">Added</h3>
+<h3 id="added-2">Added</h3>
 
 <ul>
   <li>Initial release</li>
@@ -104,7 +142,7 @@ Please file a bug if you notice a violation of semantic versioning.</p>
 </div></div>
 
       <div id="footer">
-  Generated on Sat Feb 21 05:58:48 2026 by
+  Generated on Sun Feb 22 03:06:40 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-4.0.1).
 </div>

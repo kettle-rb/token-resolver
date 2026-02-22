@@ -180,13 +180,13 @@ RSpec.describe Token::Resolver::Grammar do
       end
 
       it "does not match Ruby block with single-char param" do
-        result = parser.parse('cert_chain.select! { |fp| File.exist?(fp) }')
+        result = parser.parse("cert_chain.select! { |fp| File.exist?(fp) }")
         tokens = result.select { |e| e.key?(:token) }
         expect(tokens.length).to eq(0)
       end
 
       it "does not match shell variable expansion with pipes" do
-        result = parser.parse('${CLASSPATH:+:$CLASSPATH}')
+        result = parser.parse("${CLASSPATH:+:$CLASSPATH}")
         tokens = result.select { |e| e.key?(:token) }
         expect(tokens.length).to eq(0)
       end
@@ -198,7 +198,7 @@ RSpec.describe Token::Resolver::Grammar do
       end
 
       it "preserves Ruby block syntax in roundtrip" do
-        input = 'items.map { |x| x.to_s }'
+        input = "items.map { |x| x.to_s }"
         doc = Token::Resolver::Document.new(input)
         expect(doc.to_s).to eq(input)
         expect(doc.tokens).to be_empty

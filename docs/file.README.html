@@ -137,7 +137,7 @@ result = Token::Resolver.resolve(
     <tr>
       <td>Source</td>
       <td>
-<a href="https://gitlab.com/kettle-rb/token-resolver/"><img src="https://img.shields.io/badge/GitLab-FBA326?style=for-the-badge&amp;logo=Gitlab&amp;logoColor=orange" alt="Source on GitLab.com"></a> <a href="https://codeberg.org/kettle-rb/token-resolver"><img src="https://img.shields.io/badge/CodeBerg-4893CC?style=for-the-badge&amp;logo=CodeBerg&amp;logoColor=blue" alt="Source on CodeBerg.org"></a> <a href="https://github.com/kettle-rb/token-resolver"><img src="https://img.shields.io/badge/GitHub-238636?style=for-the-badge&amp;logo=Github&amp;logoColor=green" alt="Source on Github.com"></a> <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><img src="https://img.shields.io/badge/KLOC-0.258-FFDD67.svg?style=for-the-badge&amp;logo=YouTube&amp;logoColor=blue" alt="The best SHA: dQw4w9WgXcQ!"></a>
+<a href="https://gitlab.com/kettle-rb/token-resolver/"><img src="https://img.shields.io/badge/GitLab-FBA326?style=for-the-badge&amp;logo=Gitlab&amp;logoColor=orange" alt="Source on GitLab.com"></a> <a href="https://codeberg.org/kettle-rb/token-resolver"><img src="https://img.shields.io/badge/CodeBerg-4893CC?style=for-the-badge&amp;logo=CodeBerg&amp;logoColor=blue" alt="Source on CodeBerg.org"></a> <a href="https://github.com/kettle-rb/token-resolver"><img src="https://img.shields.io/badge/GitHub-238636?style=for-the-badge&amp;logo=Github&amp;logoColor=green" alt="Source on Github.com"></a> <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><img src="https://img.shields.io/badge/KLOC-0.268-FFDD67.svg?style=for-the-badge&amp;logo=YouTube&amp;logoColor=blue" alt="The best SHA: dQw4w9WgXcQ!"></a>
 </td>
     </tr>
     <tr>
@@ -354,7 +354,8 @@ by following the instructions below.</p>
     </tr>
     <tr>
       <td><code>separators</code></td>
-      <td><code>["\|"]</code></td>
+      <td>
+<code>["&amp;#124;"]</code> (pipe)</td>
       <td>Segment separators (sequential; last repeats)</td>
     </tr>
     <tr>
@@ -367,8 +368,33 @@ by following the instructions below.</p>
       <td><code>nil</code></td>
       <td>Maximum segments (<code>nil</code> = unlimited)</td>
     </tr>
+    <tr>
+      <td><code>segment_pattern</code></td>
+      <td><code>"[A-Za-z0-9_]"</code></td>
+      <td>Parslet character class for valid segment content</td>
+    </tr>
   </tbody>
 </table>
+
+<h3 id="segment-character-constraints">Segment Character Constraints</h3>
+
+<p>Token segments (the parts between delimiters and separators) only match characters that<br>
+conform to the <code>segment_pattern</code>. By default, this is word characters: uppercase and<br>
+lowercase letters, digits, and underscores.</p>
+
+<p>This prevents false positives with syntax that structurally resembles tokens but isn’t:</p>
+
+<pre class="code language-ruby"><code class="language-ruby"># These are NOT parsed as tokens (spaces, punctuation disqualify them):
+&quot;items.map { |x| x.to_s }&quot;                 # Ruby block parameters
+&quot;${CLASSPATH:+:$CLASSPATH}&quot;                 # Shell variable expansion
+&quot;cert_chain.select! { |fp| File.exist? }&quot;  # Ruby block with expressions
+</code></pre>
+
+<p>If you need different characters in your token segments, provide a custom pattern:</p>
+
+<pre class="code language-ruby"><code class="language-ruby"># Allow hyphens in segments: {NS|my-key}
+config = Token::Resolver::Config.new(segment_pattern: &quot;[A-Za-z0-9_-]&quot;)
+</code></pre>
 
 <h2 id="-basic-usage">🔧 Basic Usage</h2>
 
@@ -463,6 +489,14 @@ infinite loops and ensures predictable behavior when replacement values contain 
 <p>If the input doesn’t contain the <code>pre</code> delimiter at all, the parser fast-paths and returns<br>
 a single Text node without invoking parslet.</p>
 
+<h3 id="false-positive-prevention">False Positive Prevention</h3>
+
+<p>The grammar constrains segment content to the configured <code>segment_pattern</code> (default: word<br>
+characters). This ensures that syntax using the same delimiter characters — such as Ruby<br>
+block parameters (<code>{ |x| expr }</code>) or shell variable expansion (<code>${VAR:+val}</code>) — is never<br>
+mistakenly parsed as a token. Replacement keys that contain characters outside the<br>
+<code>segment_pattern</code> are rejected with an <code>ArgumentError</code> at resolve time.</p>
+
 <h2 id="-floss-funding">🦷 FLOSS Funding</h2>
 
 <p>While kettle-rb tools are free software and will always be, the project would benefit immensely from some funding.<br>
@@ -529,21 +563,21 @@ and <a href="https://tidelift.com/subscription/pkg/rubygems-token-resolver?utm_s
 
 <h2 id="-security">🔐 Security</h2>
 
-<p>See {file:SECURITY.md SECURITY.md}.</p>
+<p>See <a href="file.SECURITY.html" title="SECURITY.md">SECURITY.md</a>.</p>
 
 <h2 id="-contributing">🤝 Contributing</h2>
 
 <p>If you need some ideas of where to help, you could work on adding more code coverage,<br>
-or if it is already 💯 (see <a href="#code-coverage">below</a>) check {file:REEK reek}, <a href="https://github.com/kettle-rb/token-resolver/issues">issues</a>, or <a href="https://github.com/kettle-rb/token-resolver/pulls">PRs</a>,<br>
+or if it is already 💯 (see <a href="#code-coverage">below</a>) check <a href="file.REEK.html" title="reek">reek</a>, <a href="https://github.com/kettle-rb/token-resolver/issues">issues</a>, or <a href="https://github.com/kettle-rb/token-resolver/pulls">PRs</a>,<br>
 or use the gem and think about how it could be better.</p>
 
 <p>We <a href="https://keepachangelog.com/en/1.0.0/"><img src="https://img.shields.io/badge/keep--a--changelog-1.0.0-34495e.svg?style=flat" alt="Keep A Changelog"></a> so if you make changes, remember to update it.</p>
 
-<p>See {file:CONTRIBUTING.md CONTRIBUTING.md} for more detailed instructions.</p>
+<p>See <a href="file.CONTRIBUTING.html" title="CONTRIBUTING.md">CONTRIBUTING.md</a> for more detailed instructions.</p>
 
 <h3 id="-release-instructions">🚀 Release Instructions</h3>
 
-<p>See {file:CONTRIBUTING.md CONTRIBUTING.md}.</p>
+<p>See <a href="file.CONTRIBUTING.html" title="CONTRIBUTING.md">CONTRIBUTING.md</a>.</p>
 
 <h3 id="code-coverage">Code Coverage</h3>
 
@@ -556,7 +590,7 @@ or use the gem and think about how it could be better.</p>
 <h3 id="-code-of-conduct">🪇 Code of Conduct</h3>
 
 <p>Everyone interacting with this project’s codebases, issue trackers,<br>
-chat rooms and mailing lists agrees to follow the {file:CODE_OF_CONDUCT.md <img src="https://img.shields.io/badge/Contributor_Covenant-2.1-259D6C.svg" alt="Contributor Covenant 2.1">}.</p>
+chat rooms and mailing lists agrees to follow the <a href="file.CODE_OF_CONDUCT.html" title="&lt;img src=&quot;https://img.shields.io/badge/Contributor_Covenant-2.1-259D6C.svg&quot; alt=&quot;Contributor Covenant 2.1&quot;&gt;"><img src="https://img.shields.io/badge/Contributor_Covenant-2.1-259D6C.svg" alt="Contributor Covenant 2.1"></a>.</p>
 
 <h2 id="-contributors">🌈 Contributors</h2>
 
@@ -617,13 +651,13 @@ read this article from the creator of SemVer:</p>
 
 </details>
 
-<p>See {file:CHANGELOG.md CHANGELOG.md} for a list of releases.</p>
+<p>See <a href="file.CHANGELOG.html" title="CHANGELOG.md">CHANGELOG.md</a> for a list of releases.</p>
 
 <h2 id="-license">📄 License</h2>
 
 <p>The gem is available as open source under the terms of<br>
-the {file:LICENSE.txt MIT License} <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-259D6C.svg" alt="License: MIT"></a>.<br>
-See {file:LICENSE.txt LICENSE.txt} for the official <a href="https://opensource.stackexchange.com/questions/5778/why-do-licenses-such-as-the-mit-license-specify-a-single-year">Copyright Notice</a>.</p>
+the <a href="file.LICENSE.html" title="MIT License">MIT License</a> <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-259D6C.svg" alt="License: MIT"></a>.<br>
+See <a href="file.LICENSE.html" title="LICENSE.txt">LICENSE.txt</a> for the official <a href="https://opensource.stackexchange.com/questions/5778/why-do-licenses-such-as-the-mit-license-specify-a-single-year">Copyright Notice</a>.</p>
 
 <h3 id="-copyright">© Copyright</h3>
 
@@ -663,7 +697,7 @@ Please consider sponsoring me or the project.</p>
 </div></div>
 
       <div id="footer">
-  Generated on Sat Feb 21 05:58:48 2026 by
+  Generated on Sun Feb 22 03:06:40 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-4.0.1).
 </div>

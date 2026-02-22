@@ -179,7 +179,7 @@ RSpec.describe Token::Resolver::Resolve do
       let(:on_missing) { :keep }
 
       it "preserves Ruby block parameters unchanged" do
-        input = 'items.map { |x| x.to_s }'
+        input = "items.map { |x| x.to_s }"
         doc = Token::Resolver::Document.new(input, config: config)
         result = resolver.resolve(doc, {})
         expect(result).to eq(input)
@@ -207,7 +207,7 @@ RSpec.describe Token::Resolver::Resolve do
       end
 
       it "preserves gemspec cert_chain block with pipes" do
-        input = 'cert_chain.select! { |fp| File.exist?(fp) }'
+        input = "cert_chain.select! { |fp| File.exist?(fp) }"
         doc = Token::Resolver::Document.new(input, config: config)
         result = resolver.resolve(doc, {})
         expect(result).to eq(input)
