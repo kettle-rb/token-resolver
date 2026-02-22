@@ -44,6 +44,11 @@ module Token
       # @return [Integer, nil] Maximum number of segments (nil = unlimited)
       attr_reader :max_segments
 
+      # @return [String] Parslet-compatible character class for segment content.
+      #   Only characters matching this pattern are valid inside a token segment.
+      #   Default: `"[A-Za-z0-9_]"` (word characters — no spaces, no operators).
+      attr_reader :segment_pattern
+
       # Create a new Config.
       #
       # @param pre [String] Opening delimiter (default: "{")
@@ -51,9 +56,11 @@ module Token
       # @param separators [Array<String>] Segment separators (default: ["|"])
       # @param min_segments [Integer] Minimum segment count (default: 2)
       # @param max_segments [Integer, nil] Maximum segment count (default: nil)
+      # @param segment_pattern [String] Parslet match() character class for valid segment
+      #   characters (default: "[A-Za-z0-9_]")
       #
       # @raise [ArgumentError] If any delimiter is empty or constraints are invalid
-      def initialize(pre: "{", post: "}", separators: ["|"], min_segments: 2, max_segments: nil)
+      def initialize(pre: "{", post: "}", separators: ["|"], min_segments: 2, max_segments: nil, segment_pattern: "[A-Za-z0-9_]")
         validate!(pre, post, separators, min_segments, max_segments)
 
         @pre = pre.dup.freeze
@@ -61,6 +68,7 @@ module Token
         @separators = separators.map { |s| s.dup.freeze }.freeze
         @min_segments = min_segments
         @max_segments = max_segments
+        @segment_pattern = segment_pattern.dup.freeze
 
         freeze
       end
@@ -85,7 +93,8 @@ module Token
           post == other.post &&
           separators == other.separators &&
           min_segments == other.min_segments &&
-          max_segments == other.max_segments
+          max_segments == other.max_segments &&
+          segment_pattern == other.segment_pattern
       end
 
       alias_method :==, :eql?
@@ -94,7 +103,7 @@ module Token
       #
       # @return [Integer]
       def hash
-        [pre, post, separators, min_segments, max_segments].hash
+        [pre, post, separators, min_segments, max_segments, segment_pattern].hash
       end
 
       # Get the separator for a given boundary index.

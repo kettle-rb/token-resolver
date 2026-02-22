@@ -50,15 +50,18 @@ module Token
       # @return [String] Resolved text
       #
       # @raise [UnresolvedTokenError] If on_missing is :raise and a token has no replacement
+      # @raise [ArgumentError] If a replacement key contains characters outside the config's segment_pattern
       def resolve(document_or_nodes, replacements)
-        nodes = case document_or_nodes
+        nodes, config = case document_or_nodes
         when Document
-          document_or_nodes.nodes
+          [document_or_nodes.nodes, document_or_nodes.config]
         when Array
-          document_or_nodes
+          [document_or_nodes, nil]
         else
           raise ArgumentError, "Expected Document or Array of nodes, got #{document_or_nodes.class}"
         end
+
+        validate_replacement_keys!(replacements, config) if config && !replacements.empty?
 
         result = +""
         nodes.each do |node|
@@ -86,6 +89,28 @@ module Token
           result << token_node.to_s
         when :remove
           # emit nothing
+        end
+      end
+
+      # Validate that all replacement keys only contain characters allowed by the config.
+      # Each key is composed of segments (matching segment_pattern) joined by separators.
+      #
+      # @param replacements [Hash{String => String}]
+      # @param config [Config]
+      # @raise [ArgumentError] If any key contains invalid characters
+      def validate_replacement_keys!(replacements, config)
+        # Build a regex that matches a valid key: segment (sep segment)*
+        seg = config.segment_pattern
+        seps = config.separators.map { |s| Regexp.escape(s) }.join("|")
+        valid_key_re = /\A#{seg}+((?:#{seps})#{seg}+)*\z/
+
+        replacements.each_key do |key|
+          unless valid_key_re.match?(key)
+            raise ArgumentError,
+              "Invalid replacement key: #{key.inspect}. " \
+              "Key segments must match #{config.segment_pattern.inspect} " \
+              "and be separated by one of #{config.separators.inspect}."
+          end
         end
       end
     end

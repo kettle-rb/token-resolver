@@ -53,6 +53,7 @@ module Token
           separators = config.separators
           min_segs = config.min_segments
           max_segs = config.max_segments
+          seg_pattern = config.segment_pattern
 
           Class.new(Parslet::Parser) do
             # A segment is one or more characters that are not a separator or post delimiter.
@@ -62,10 +63,11 @@ module Token
             # Build the set of strings that terminate a segment
             terminators = ([post_str] + separators).uniq
 
-            # segment: one or more chars that aren't any terminator
+            # segment: one or more chars that match the segment_pattern and
+            #          aren't any terminator string.
             rule(:segment) {
               terminator_absent = terminators.map { |t| str(t).absent? }.reduce(:>>)
-              (terminator_absent >> any).repeat(1)
+              (terminator_absent >> match(seg_pattern)).repeat(1)
             }
 
             # token: pre + segment + (sep + segment).repeat + post

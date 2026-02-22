@@ -171,6 +171,62 @@ RSpec.describe Token::Resolver::Grammar do
         expect(tokens.length).to eq(0)
       end
     end
+
+    context "with false positive prevention (segment_pattern)" do
+      it "does not match Ruby block parameters as tokens" do
+        result = parser.parse('{ |repo_name| "url" }')
+        tokens = result.select { |e| e.key?(:token) }
+        expect(tokens.length).to eq(0)
+      end
+
+      it "does not match Ruby block with single-char param" do
+        result = parser.parse('cert_chain.select! { |fp| File.exist?(fp) }')
+        tokens = result.select { |e| e.key?(:token) }
+        expect(tokens.length).to eq(0)
+      end
+
+      it "does not match shell variable expansion with pipes" do
+        result = parser.parse('${CLASSPATH:+:$CLASSPATH}')
+        tokens = result.select { |e| e.key?(:token) }
+        expect(tokens.length).to eq(0)
+      end
+
+      it "still matches valid tokens with word-character segments" do
+        result = parser.parse("{KJ|GEM_NAME}")
+        tokens = result.select { |e| e.key?(:token) }
+        expect(tokens.length).to eq(1)
+      end
+
+      it "preserves Ruby block syntax in roundtrip" do
+        input = 'items.map { |x| x.to_s }'
+        doc = Token::Resolver::Document.new(input)
+        expect(doc.to_s).to eq(input)
+        expect(doc.tokens).to be_empty
+      end
+
+      it "preserves shell expansion in roundtrip" do
+        input = 'export PATH="${HOME}/bin${PATH:+:$PATH}"'
+        doc = Token::Resolver::Document.new(input)
+        expect(doc.to_s).to eq(input)
+        expect(doc.tokens).to be_empty
+      end
+
+      context "with multi-separator config" do
+        let(:config) { Token::Resolver::Config.new(separators: ["|", ":"]) }
+
+        it "does not match Ruby block parameters" do
+          result = parser.parse('git_source(:codeberg) { |repo_name| "https://codeberg.org/#{repo_name}" }')
+          tokens = result.select { |e| e.key?(:token) }
+          expect(tokens.length).to eq(0)
+        end
+
+        it "matches valid multi-separator tokens" do
+          result = parser.parse("{KJ|AUTHOR:NAME}")
+          tokens = result.select { |e| e.key?(:token) }
+          expect(tokens.length).to eq(1)
+        end
+      end
+    end
   end
 
   describe ".clear_cache!" do

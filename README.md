@@ -157,13 +157,36 @@ NOTE: Be prepared to track down certs for signed gems and add them the same way 
 
 ### Token Config Options
 
-| Option         | Default             | Description                                   |
-|----------------|---------------------|-----------------------------------------------|
-| `pre`          | `"{"`               | Opening delimiter                             |
-| `post`         | `"}"`               | Closing delimiter                             |
-| `separators`   | `["&#124;"]` (pipe) | Segment separators (sequential; last repeats) |
-| `min_segments` | `2`                 | Minimum segments for a valid token            |
-| `max_segments` | `nil`               | Maximum segments (`nil` = unlimited)          |
+| Option            | Default             | Description                                        |
+|-------------------|---------------------|----------------------------------------------------|
+| `pre`             | `"{"`               | Opening delimiter                                  |
+| `post`            | `"}"`               | Closing delimiter                                  |
+| `separators`      | `["&#124;"]` (pipe) | Segment separators (sequential; last repeats)      |
+| `min_segments`    | `2`                 | Minimum segments for a valid token                 |
+| `max_segments`    | `nil`               | Maximum segments (`nil` = unlimited)               |
+| `segment_pattern` | `"[A-Za-z0-9_]"`    | Parslet character class for valid segment content  |
+
+### Segment Character Constraints
+
+Token segments (the parts between delimiters and separators) only match characters that
+conform to the `segment_pattern`. By default, this is word characters: uppercase and
+lowercase letters, digits, and underscores.
+
+This prevents false positives with syntax that structurally resembles tokens but isn't:
+
+```ruby
+# These are NOT parsed as tokens (spaces, punctuation disqualify them):
+'items.map { |x| x.to_s }'                 # Ruby block parameters
+'${CLASSPATH:+:$CLASSPATH}'                 # Shell variable expansion
+'cert_chain.select! { |fp| File.exist? }'  # Ruby block with expressions
+```
+
+If you need different characters in your token segments, provide a custom pattern:
+
+```ruby
+# Allow hyphens in segments: {NS|my-key}
+config = Token::Resolver::Config.new(segment_pattern: "[A-Za-z0-9_-]")
+```
 
 ## 🔧 Basic Usage
 
@@ -262,6 +285,14 @@ infinite loops and ensures predictable behavior when replacement values contain 
 
 If the input doesn't contain the `pre` delimiter at all, the parser fast-paths and returns
 a single Text node without invoking parslet.
+
+### False Positive Prevention
+
+The grammar constrains segment content to the configured `segment_pattern` (default: word
+characters). This ensures that syntax using the same delimiter characters — such as Ruby
+block parameters (`{ |x| expr }`) or shell variable expansion (`${VAR:+val}`) — is never
+mistakenly parsed as a token. Replacement keys that contain characters outside the
+`segment_pattern` are rejected with an `ArgumentError` at resolve time.
 
 
 ## 🦷 FLOSS Funding

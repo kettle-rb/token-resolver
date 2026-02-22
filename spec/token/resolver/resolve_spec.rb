@@ -136,5 +136,82 @@ RSpec.describe Token::Resolver::Resolve do
         expect { resolver.resolve("string", {}) }.to raise_error(ArgumentError, /Expected Document or Array/)
       end
     end
+
+    context "with invalid replacement keys" do
+      it "raises ArgumentError for keys with spaces" do
+        doc = Token::Resolver::Document.new("hello", config: config)
+        expect {
+          resolver.resolve(doc, {" |repo_name" => "x"})
+        }.to raise_error(ArgumentError, /Invalid replacement key/)
+      end
+
+      it "raises ArgumentError for keys with punctuation in segments" do
+        doc = Token::Resolver::Document.new("hello", config: config)
+        expect {
+          resolver.resolve(doc, {"KJ|File.exist?(fp)" => "x"})
+        }.to raise_error(ArgumentError, /Invalid replacement key/)
+      end
+
+      it "accepts valid word-character keys" do
+        doc = Token::Resolver::Document.new("{KJ|NAME}", config: config)
+        expect {
+          resolver.resolve(doc, {"KJ|NAME" => "x"})
+        }.not_to raise_error
+      end
+
+      it "accepts valid multi-separator keys" do
+        multi_config = Token::Resolver::Config.new(separators: ["|", ":"])
+        doc = Token::Resolver::Document.new("{KJ|AUTHOR:NAME}", config: multi_config)
+        expect {
+          resolver.resolve(doc, {"KJ|AUTHOR:NAME" => "x"})
+        }.not_to raise_error
+      end
+
+      it "skips validation when given an Array instead of Document" do
+        nodes = [Token::Resolver::Node::Text.new("hi")]
+        expect {
+          resolver.resolve(nodes, {" bad|key" => "x"})
+        }.not_to raise_error
+      end
+    end
+
+    context "with Ruby and shell syntax that resembles tokens" do
+      let(:on_missing) { :keep }
+
+      it "preserves Ruby block parameters unchanged" do
+        input = 'items.map { |x| x.to_s }'
+        doc = Token::Resolver::Document.new(input, config: config)
+        result = resolver.resolve(doc, {})
+        expect(result).to eq(input)
+      end
+
+      it "preserves multi-line Ruby with block params and real tokens" do
+        input = <<~RUBY
+          git_source(:codeberg) { |repo_name| "https://codeberg.org/\#{repo_name}" }
+          gem "{KJ|GEM_NAME}", "~> 1.0"
+        RUBY
+        doc = Token::Resolver::Document.new(input, config: config)
+        result = resolver.resolve(doc, {"KJ|GEM_NAME" => "my-gem"})
+        expected = <<~RUBY
+          git_source(:codeberg) { |repo_name| "https://codeberg.org/\#{repo_name}" }
+          gem "my-gem", "~> 1.0"
+        RUBY
+        expect(result).to eq(expected)
+      end
+
+      it "preserves shell variable expansion with pipes" do
+        input = 'export CLASSPATH="${JARS_DIR}/jtreesitter.jar${CLASSPATH:+:$CLASSPATH}"'
+        doc = Token::Resolver::Document.new(input, config: config)
+        result = resolver.resolve(doc, {})
+        expect(result).to eq(input)
+      end
+
+      it "preserves gemspec cert_chain block with pipes" do
+        input = 'cert_chain.select! { |fp| File.exist?(fp) }'
+        doc = Token::Resolver::Document.new(input, config: config)
+        result = resolver.resolve(doc, {})
+        expect(result).to eq(input)
+      end
+    end
   end
 end

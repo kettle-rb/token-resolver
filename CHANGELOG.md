@@ -20,6 +20,14 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
+- `Config#segment_pattern` option — a parslet character class constraining which characters
+  are valid inside token segments (default: `"[A-Za-z0-9_]"`). This prevents false positive
+  token matches against Ruby block parameters (`{ |x| expr }`), shell variable expansion
+  (`${VAR:+val}`), and other syntax that structurally resembles tokens but contains spaces
+  or punctuation in the "segments".
+- `Resolve#resolve` now validates replacement keys against the config's `segment_pattern` and
+  raises `ArgumentError` if a key contains characters that the grammar would never parse.
+
 ### Changed
 
 ### Deprecated
@@ -27,6 +35,14 @@ Please file a bug if you notice a violation of semantic versioning.
 ### Removed
 
 ### Fixed
+
+- **False positive token matches** — the grammar previously used `any` (match any character)
+  for segment content, which allowed spaces, operators, and punctuation inside token segments.
+  This caused Ruby block syntax like `{ |fp| File.exist?(fp) }` and shell expansion like
+  `${CLASSPATH:+:$CLASSPATH}` to be incorrectly parsed as tokens. With multi-separator configs
+  (`["|", ":"]`), the second `|` was reconstructed as `:` during `on_missing: :keep`
+  roundtripping, silently corrupting source files. The grammar now uses
+  `match(segment_pattern)` instead of `any`, limiting segments to word characters by default.
 
 ### Security
 
