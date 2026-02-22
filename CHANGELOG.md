@@ -30,6 +30,27 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Security
 
+## [1.0.2] - 2026-02-22
+
+- TAG: [v1.0.2][1.0.2t]
+- COVERAGE: 98.13% -- 263/268 lines in 10 files
+- BRANCH COVERAGE: 91.18% -- 62/68 branches in 10 files
+- 96.77% documented
+
+### Added
+
+- **Benchmarking tools** — Performance comparison suite comparing `token-resolver` against simpler
+  alternatives (`String#gsub` and `Kernel#sprintf`):
+  - `benchmarks/comparison.rb` — Comprehensive benchmark script measuring iterations per second
+    across four realistic scenarios (simple replacement, moderate complexity, high complexity,
+    and large documents with sparse tokens)
+  - `gemfiles/modular/benchmark/ips.gemfile` — Development dependency for `benchmark-ips` gem
+  - Rake tasks: `rake bench:comparison` (run comparison), `rake bench:list` (list benchmarks),
+    `rake bench:run` (run all benchmarks), `rake bench` (alias)
+  - `BENCHMARK.md` — Results and analysis showing token-resolver is 100-3000x slower due to
+    PEG parsing, validation, and AST building; includes guidance on when to use each approach
+    and real-world performance context
+
 ## [1.0.1] - 2026-02-22
 
 - TAG: [v1.0.1][1.0.1t]
@@ -70,7 +91,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Security
 
-[Unreleased]: https://github.com/kettle-rb/token-resolver/compare/v1.0.1...HEAD
+[Unreleased]: https://github.com/kettle-rb/token-resolver/compare/v1.0.2...HEAD
+[1.0.2]: https://github.com/kettle-rb/token-resolver/compare/v1.0.1...v1.0.2
+[1.0.2t]: https://github.com/kettle-rb/token-resolver/releases/tag/v1.0.2
 [1.0.1]: https://github.com/kettle-rb/token-resolver/compare/v1.0.0...v1.0.1
 [1.0.1t]: https://github.com/kettle-rb/token-resolver/releases/tag/v1.0.1
 [1.0.0]: https://github.com/kettle-rb/ast-merge/compare/e0e299cad6e6914d512845c71df6b7ac8009e5ac...v1.0.0

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="RUBY_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$/../../vendor/gem_bench">
+      <sourceFolder url="file://$MODULE_DIR$/../../vendor/gem_bench/features" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../vendor/gem_bench/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../vendor/gem_bench/test" isTestSource="true" />
+    </content>
+    <orderEntry type="jdk" jdkName="mise: 4.0.1" jdkType="RUBY_SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="PROVIDED" name="ansi (v1.5.0, mise: 4.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="docile (v1.4.1, mise: 4.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="lint_roller (v1.1.0, mise: 4.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="racc (v1.8.1, mise: 4.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rainbow (v3.1.1, mise: 4.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rspec-block_is_expected (v1.0.6, mise: 4.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rubocop-gradual (v0.3.6, mise: 4.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="ruby-progressbar (v1.13.0, mise: 4.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="simplecov (v0.22.0, mise: 4.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="simplecov-rcov (v0.3.7, mise: 4.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="simplecov_json_formatter (v0.1.4, mise: 4.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="standard-custom (v1.0.2, mise: 4.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="standard-rubocop-lts (v1.0.10, mise: 4.0.1) [gem]" level="application" />
+  </component>
+  <component name="RubyModuleProperties">
+    <option name="autoCreated" value="true" />
+  </component>
+</module>

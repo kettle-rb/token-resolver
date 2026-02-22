@@ -94,6 +94,53 @@ rescue LoadError
   end
 end
 
+### BENCHMARK TASKS
+namespace :bench do
+  desc("List available benchmark scripts")
+  task(:list) do
+    benchmark_files = Dir[File.join(__dir__, "benchmarks", "*.rb")]
+    if benchmark_files.empty?
+      puts "No benchmark scripts found in benchmarks/"
+    else
+      puts "Available benchmark scripts:"
+      benchmark_files.each do |file|
+        puts "  - #{File.basename(file, ".rb")}"
+      end
+    end
+  end
+
+  desc("Run comparison benchmark (token-resolver vs gsub vs sprintf)")
+  task(:comparison) do
+    if ENV["CI"]
+      puts "Skipping benchmarks in CI environment"
+    else
+      ruby File.join(__dir__, "benchmarks", "comparison.rb")
+    end
+  end
+
+  desc("Run all benchmark scripts (skips on CI)")
+  task(:run) do
+    if ENV["CI"]
+      puts "Skipping benchmarks in CI environment"
+    else
+      benchmark_files = Dir[File.join(__dir__, "benchmarks", "*.rb")]
+      if benchmark_files.empty?
+        puts "No benchmark scripts found in benchmarks/"
+      else
+        benchmark_files.each do |file|
+          puts "\n" + "=" * 80
+          puts "Running: #{File.basename(file)}"
+          puts "=" * 80
+          ruby file
+        end
+      end
+    end
+  end
+end
+
+desc("Run all benchmarks (alias for bench:run)")
+task(bench: ["bench:run"])
+
 ### RELEASE TASKS
 # Setup stone_checksums
 begin

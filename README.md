@@ -286,6 +286,34 @@ infinite loops and ensures predictable behavior when replacement values contain 
 If the input doesn't contain the `pre` delimiter at all, the parser fast-paths and returns
 a single Text node without invoking parslet.
 
+#### 📊 Benchmarks
+
+Token-resolver prioritizes **flexibility, configurability, and maintainability** over raw speed.
+
+**⚠️ Important**: Token-resolver is **100-3000x slower** than simple alternatives like `String#gsub` and `Kernel#sprintf`.
+because it does significantly more work:
+- Full PEG parsing of the input string
+- Token validation and structure enforcement
+- Building an AST for introspection
+- Flexible error handling for missing tokens
+
+This performance difference is **expected and acceptable** because these are fundamentally different
+approaches solving different problems.
+
+See [BENCHMARK.md](BENCHMARK.md) for detailed performance comparisons and guidance on:
+
+- **When to use token-resolver**: Configurable token structures, validation, introspection, flexible error handling
+- **When to use String#gsub**: Fixed token patterns, maximum performance, simple one-shot replacements
+- **When to use Kernel#sprintf**: Positional formatting, fixed templates, printf-style output
+
+The choice should be based on your actual requirements, not just raw performance metrics.
+
+To run benchmarks on your system:
+
+```bash
+bundle exec rake bench:comparison
+```
+
 ### False Positive Prevention
 
 The grammar constrains segment content to the configured `segment_pattern` (default: word
@@ -293,7 +321,6 @@ characters). This ensures that syntax using the same delimiter characters — su
 block parameters (`{ |x| expr }`) or shell variable expansion (`${VAR:+val}`) — is never
 mistakenly parsed as a token. Replacement keys that contain characters outside the
 `segment_pattern` are rejected with an `ArgumentError` at resolve time.
-
 
 ## 🦷 FLOSS Funding
 

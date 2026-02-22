@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  File: BENCHMARK
+  
+    &mdash; Documentation by YARD 0.9.38
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "BENCHMARK";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="file_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: BENCHMARK</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><div id='filecontents'><h1 id="token-resolver-benchmark-results">Token-Resolver Benchmark Results</h1>
+
+<p>⚠️ <strong>IMPORTANT</strong>: This is NOT an apples-to-apples performance comparison.</p>
+
+<p>These three approaches solve different problems with different levels of functionality.<br>
+The performance differences reflect this - token-resolver does more work than the alternatives.</p>
+
+<h2 id="what-this-benchmark-measures">What This Benchmark Measures</h2>
+
+<p>This benchmark compares three approaches to token/template replacement:</p>
+
+<ol>
+  <li>
+<strong>token-resolver</strong>:
+    <ul>
+      <li>Full PEG parsing of input string</li>
+      <li>Token validation (format, segment count)</li>
+      <li>Returns parsed document with nodes for introspection</li>
+      <li>Configurable token structure</li>
+      <li>Error handling for missing tokens</li>
+    </ul>
+  </li>
+  <li>
+<strong>String#gsub</strong>:
+    <ul>
+      <li>Simple regex pattern matching</li>
+      <li>Fixed token format</li>
+      <li>No parsing or validation</li>
+      <li>No introspection capabilities</li>
+    </ul>
+  </li>
+  <li>
+<strong>Kernel#sprintf</strong>:
+    <ul>
+      <li>Positional format string substitution</li>
+      <li>Pre-determined template structure</li>
+      <li>No runtime token discovery</li>
+      <li>Not suitable for variable/unknown tokens</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="methodology">Methodology</h2>
+
+<p>Each scenario runs for 5 seconds with 2 seconds warmup using <code>benchmark-ips</code>.</p>
+
+<p><strong>Why the large performance difference?</strong></p>
+
+<p>Token-resolver is significantly slower because it:</p>
+<ul>
+  <li>Parses the entire input string using a PEG parser (Parslet gem)</li>
+  <li>Builds an AST of Text and Token nodes</li>
+  <li>Validates token structure against configuration</li>
+  <li>Allocates more objects than simple regex substitution</li>
+</ul>
+
+<p>In contrast, <code>String#gsub</code> just does a simple regex replacement with minimal allocations.</p>
+
+<h2 id="test-environment">Test Environment</h2>
+
+<ul>
+  <li>
+<strong>Ruby Version</strong>: 4.0.1</li>
+  <li>
+<strong>Platform</strong>: x86_64-linux</li>
+  <li>
+<strong>Ruby Description</strong>: ruby 4.0.1 (2026-01-13 revision e04267a14b) +PRISM [x86_64-linux]</li>
+  <li>
+<strong>Date</strong>: 2026-02-22 04:17:45 MST</li>
+</ul>
+
+<h2 id="results">Results</h2>
+
+<h3 id="1-simple-replacement-2-tokens">1. Simple Replacement (2 tokens)</h3>
+
+<p><strong>Description</strong>: Basic token replacement in a short string</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>
+<strong>Input Size</strong>: 41 bytes</td>
+      <td>
+<strong>Token Count</strong>: 2</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>Approach</th>
+      <th>Iterations/Second</th>
+      <th>Time per Iteration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Kernel#sprintf</td>
+      <td>991.8k ±1.6%</td>
+      <td>1.01µs</td>
+    </tr>
+    <tr>
+      <td>String#gsub</td>
+      <td>163.5k ±1.7%</td>
+      <td>6.12µs</td>
+    </tr>
+    <tr>
+      <td>token-resolver</td>
+      <td>523.7 ±2.9%</td>
+      <td>1909.53µs</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Comparison</strong>: <code>String#gsub</code> is <strong>312x slower</strong> than <code>token-resolver</code>.<br>
+<strong>Comparison</strong>: <code>Kernel#sprintf</code> is <strong>1894x slower</strong> than <code>token-resolver</code>.</p>
+
+<h3 id="2-moderate-complexity-7-tokens">2. Moderate Complexity (7 tokens)</h3>
+
+<p><strong>Description</strong>: Multiple tokens with repeated keys</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>
+<strong>Input Size</strong>: 123 bytes</td>
+      <td>
+<strong>Token Count</strong>: 7</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>Approach</th>
+      <th>Iterations/Second</th>
+      <th>Time per Iteration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Kernel#sprintf</td>
+      <td>521.8k ±0.6%</td>
+      <td>1.92µs</td>
+    </tr>
+    <tr>
+      <td>String#gsub</td>
+      <td>62.4k ±1.2%</td>
+      <td>16.03µs</td>
+    </tr>
+    <tr>
+      <td>token-resolver</td>
+      <td>193.2 ±1.6%</td>
+      <td>5176.46µs</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Comparison</strong>: <code>String#gsub</code> is <strong>323x slower</strong> than <code>token-resolver</code>.<br>
+<strong>Comparison</strong>: <code>Kernel#sprintf</code> is <strong>2701x slower</strong> than <code>token-resolver</code>.</p>
+
+<h3 id="3-high-complexity-20-tokens">3. High Complexity (20 tokens)</h3>
+
+<p><strong>Description</strong>: Large template with many tokens</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>
+<strong>Input Size</strong>: 278 bytes</td>
+      <td>
+<strong>Token Count</strong>: 22</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>Approach</th>
+      <th>Iterations/Second</th>
+      <th>Time per Iteration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Kernel#sprintf</td>
+      <td>197.3k ±2.7%</td>
+      <td>5.07µs</td>
+    </tr>
+    <tr>
+      <td>String#gsub</td>
+      <td>18.4k ±1.2%</td>
+      <td>54.44µs</td>
+    </tr>
+    <tr>
+      <td>token-resolver</td>
+      <td>85.8 ±1.2%</td>
+      <td>11658.8µs</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Comparison</strong>: <code>String#gsub</code> is <strong>214x slower</strong> than <code>token-resolver</code>.<br>
+<strong>Comparison</strong>: <code>Kernel#sprintf</code> is <strong>2301x slower</strong> than <code>token-resolver</code>.</p>
+
+<h3 id="4-large-document-with-sparse-tokens-5-tokens-in-1kb-text">4. Large Document with Sparse Tokens (5 tokens in 1KB text)</h3>
+
+<p><strong>Description</strong>: Realistic document with occasional token replacement</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>
+<strong>Input Size</strong>: 1479 bytes</td>
+      <td>
+<strong>Token Count</strong>: 5</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>Approach</th>
+      <th>Iterations/Second</th>
+      <th>Time per Iteration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>String#gsub</td>
+      <td>67.7k ±2.0%</td>
+      <td>14.78µs</td>
+    </tr>
+    <tr>
+      <td>token-resolver</td>
+      <td>20.8 ±0.0%</td>
+      <td>48080.19µs</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Comparison</strong>: <code>String#gsub</code> is <strong>3254x slower</strong> than <code>token-resolver</code>.</p>
+
+<h2 id="analysis--recommendations">Analysis &amp; Recommendations</h2>
+
+<h3 id="understanding-the-performance-gap">Understanding the Performance Gap</h3>
+
+<p>The 100-3000x performance difference is <strong>not a problem</strong> - it reflects that these<br>
+are fundamentally different approaches solving different problems:</p>
+
+<p><strong>token-resolver is designed for:</strong></p>
+<ul>
+  <li>Applications where token structure may vary</li>
+  <li>Scenarios requiring token validation and introspection</li>
+  <li>Cases where you need to know which tokens were found before resolving</li>
+  <li>Systems with configurable token delimiters/separators</li>
+  <li>When you need proper error handling for invalid/missing tokens</li>
+</ul>
+
+<p><strong>Simple approaches are designed for:</strong></p>
+<ul>
+  <li>Fixed, pre-determined token/template formats</li>
+  <li>Raw performance where overhead matters</li>
+  <li>Simple, one-shot replacements</li>
+  <li>Cases where template format is hardcoded</li>
+</ul>
+
+<h3 id="when-to-use-each-approach">When to Use Each Approach</h3>
+
+<h4 id="use-token-resolver-when">Use <code>token-resolver</code> when:</h4>
+
+<ul>
+  <li>✅ Token structure is <strong>configurable</strong> (custom delimiters, separators)</li>
+  <li>✅ You need <strong>validation</strong> of token format (min/max segments)</li>
+  <li>✅ You need to <strong>parse and inspect</strong> tokens before resolution</li>
+  <li>✅ You want <strong>flexible error handling</strong> for missing tokens (raise/keep/remove)</li>
+  <li>✅ Token structure may <strong>change across contexts</strong>
+</li>
+  <li>✅ You value <strong>maintainability</strong> and <strong>clarity</strong> over absolute speed</li>
+  <li>✅ You need <strong>single-pass resolution</strong> (replacement values not re-scanned)</li>
+</ul>
+
+<p><strong>Example use cases:</strong></p>
+<ul>
+  <li>Template processing pipelines with user-configurable tokens</li>
+  <li>ETL systems where token format varies by data source</li>
+  <li>Configuration file processing with validation</li>
+  <li>Document generation where tokens must be identified and reported</li>
+</ul>
+
+<h4 id="use-stringgsub-when">Use <code>String#gsub</code> when:</h4>
+
+<ul>
+  <li>✅ Token format is <strong>fixed and simple</strong>
+</li>
+  <li>✅ You don’t need <strong>token validation</strong> or introspection</li>
+  <li>✅ You need <strong>maximum performance</strong> for fixed patterns</li>
+  <li>✅ The token pattern <strong>won’t change</strong>
+</li>
+  <li>✅ You’re doing <strong>simple, one-shot replacements</strong>
+</li>
+</ul>
+
+<p><strong>Example use cases:</strong></p>
+<ul>
+  <li>Simple string templating with fixed patterns</li>
+  <li>Log message formatting</li>
+  <li>Quick text substitutions</li>
+</ul>
+
+<h4 id="use-kernelsprintf-when">Use <code>Kernel#sprintf</code> when:</h4>
+
+<ul>
+  <li>✅ Tokens are <strong>positional</strong> rather than named</li>
+  <li>✅ Template structure is <strong>completely fixed</strong>
+</li>
+  <li>✅ You need <strong>formatting options</strong> (padding, precision, etc.)</li>
+  <li>✅ You want the <strong>fastest possible string formatting</strong>
+</li>
+</ul>
+
+<p><strong>Example use cases:</strong></p>
+<ul>
+  <li>printf-style formatting</li>
+  <li>Fixed output formatting</li>
+  <li>Performance-critical string building</li>
+</ul>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Token-resolver is <strong>significantly slower</strong> than simple alternatives because it does<br>
+significantly more work: parsing, validation, introspection, and flexible error handling.</p>
+
+<p>This is a <strong>feature, not a bug</strong>. The performance cost is worth paying when you need<br>
+the flexibility and robustness that token-resolver provides.</p>
+
+<p>Choose based on your actual requirements:</p>
+<ul>
+  <li>Need flexibility and validation? → <strong>token-resolver</strong> ✅</li>
+  <li>Need speed and have fixed patterns? → <strong>String#gsub</strong> ✅</li>
+  <li>Need positional formatting? → <strong>Kernel#sprintf</strong> ✅</li>
+</ul>
+
+<hr>
+
+<p><em>Benchmark generated on 2026-02-22 04:17:45 MST</em></p>
+
+<p>To regenerate this benchmark:</p>
+
+<pre class="code language-bash"><code class="language-bash">bundle exec rake bench:comparison
+# or
+bundle exec ruby benchmarks/comparison.rb
+</code></pre>
+</div></div>
+
+      <div id="footer">
+  Generated on Sun Feb 22 04:40:15 2026 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.38 (ruby-4.0.1).
+</div>
+
+    </div>
+  </body>
+</html>

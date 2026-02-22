@@ -5,7 +5,7 @@ module Token
     # Version information for Token::Resolver
     module Version
       # Current version of the token-resolver gem
-      VERSION = "1.0.1"
+      VERSION = "1.0.2"
     end
     VERSION = Version::VERSION # traditional location
   end

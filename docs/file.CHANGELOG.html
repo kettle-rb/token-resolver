@@ -68,9 +68,30 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 and <a href="https://tom.preston-werner.com/2022/05/23/major-version-numbers-are-not-sacred.html">yes</a>, platform and engine support are part of the <a href="https://github.com/semver/semver/issues/716#issuecomment-869336139">public API</a>.<br>
 Please file a bug if you notice a violation of semantic versioning.</p>
 
-<h2 id="unreleased"><a href="https://github.com/kettle-rb/token-resolver/compare/v1.0.1...HEAD">Unreleased</a></h2>
+<h2 id="unreleased"><a href="https://github.com/kettle-rb/token-resolver/compare/v1.0.2...HEAD">Unreleased</a></h2>
 
 <h3 id="added">Added</h3>
+
+<ul>
+  <li>
+<strong>Benchmarking tools</strong> — Performance comparison suite comparing <code>token-resolver</code> against simpler<br>
+alternatives (<code>String#gsub</code> and <code>Kernel#sprintf</code>):
+    <ul>
+      <li>
+<code>benchmarks/comparison.rb</code> — Comprehensive benchmark script measuring iterations per second<br>
+across four realistic scenarios (simple replacement, moderate complexity, high complexity,<br>
+and large documents with sparse tokens)</li>
+      <li>
+<code>gemfiles/modular/benchmark/ips.gemfile</code> — Development dependency for <code>benchmark-ips</code> gem</li>
+      <li>Rake tasks: <code>rake bench:comparison</code> (run comparison), <code>rake bench:list</code> (list benchmarks),<br>
+<code>rake bench:run</code> (run all benchmarks), <code>rake bench</code> (alias)</li>
+      <li>
+<code>BENCHMARK.md</code> — Results and analysis showing token-resolver is 100-3000x slower due to<br>
+PEG parsing, validation, and AST building; includes guidance on when to use each approach<br>
+and real-world performance context</li>
+    </ul>
+  </li>
+</ul>
 
 <h3 id="changed">Changed</h3>
 
@@ -142,7 +163,7 @@ roundtripping, silently corrupting source files. The grammar now uses<br>
 </div></div>
 
       <div id="footer">
-  Generated on Sun Feb 22 03:06:40 2026 by
+  Generated on Sun Feb 22 04:40:15 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-4.0.1).
 </div>
