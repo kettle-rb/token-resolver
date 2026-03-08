@@ -25,37 +25,49 @@ lib/token/resolver/
 └── version.rb      — Version information
 ```
 
-## Key Design Decisions
-
-1. **Grammar never fails** — Any input is valid. Unrecognized content becomes text nodes.
-2. **Single-pass resolution** — Replacement values are NOT re-scanned for tokens.
-3. **Config is frozen and hashable** — Grammar classes are cached per config.
-4. **Fast-path** — If input doesn't contain the `pre` delimiter, no parslet invocation.
-
 ## Running Tests
 
 ```bash
+mise exec -C /home/pboling/src/kettle-rb/ast-merge/vendor/token-resolver -- bundle exec rspec
+```
+
+## Critical AI Agent Terminal Guidance
+
+### Terminal Output Is Available, but Each Command Is Isolated
+
+**IMPORTANT**: AI agents can reliably read terminal output when commands run in the background and the output is polled afterward. However, every terminal command should be treated as a fresh shell with no shared state.
+
+### Use `mise` for Project Environment
+
+**IMPORTANT**: The canonical project environment now lives in `mise.toml`, with local overrides in `.env.local` loaded via `dotenvy`.
+
+✅ **CORRECT**:
+```bash
+mise exec -C /home/pboling/src/kettle-rb/ast-merge/vendor/token-resolver -- bundle exec rspec
+```
+
+✅ **CORRECT**:
+```bash
+eval "$(mise env -C /home/pboling/src/kettle-rb/ast-merge/vendor/token-resolver -s bash)" && bundle exec rspec
+```
+
+❌ **WRONG**:
+```bash
+cd /home/pboling/src/kettle-rb/ast-merge/vendor/token-resolver
 bundle exec rspec
 ```
 
-## Critical AI Agent Terminal Limitations
+❌ **WRONG**:
+```bash
+cd /home/pboling/src/kettle-rb/ast-merge/vendor/token-resolver && bundle exec rspec
+```
 
-**IMPORTANT**: AI agents (Copilot, etc.) almost never can see terminal output from `run_in_terminal`.
+### Additional Rules
 
-**Workarounds:**
-1. **ALWAYS redirect output to a file** in the project's local `tmp/` directory, then read it back:
-   ```bash
-   bundle exec rspec 2>&1 > tmp/rspec-output.txt
-   ```
-   Then use `read_file` tool on `tmp/rspec-output.txt`.
-
-2. **NEVER chain `cd` with other commands via `&&`** — `direnv` won't initialize until after
-   all commands finish. Run `cd` alone first, then run subsequent commands separately.
-
-3. **NEVER use `head`, `tail`, or any output truncation** with test commands.
-
-4. **Use internal tools** (`grep_search`, `read_file`, `list_dir`) instead of terminal for
+1. **NEVER use `head`, `tail`, or any output truncation** with test commands.
+2. **Use internal tools** (`grep_search`, `read_file`, `list_dir`) instead of terminal for
    information gathering whenever possible.
+3. **Do NOT rely on prior shell state** — Previous `cd`, `export`, aliases, and functions are not available to the next command.
 
 ## API Conventions
 
