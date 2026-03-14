@@ -28,7 +28,7 @@ lib/token/resolver/
 ## Running Tests
 
 ```bash
-mise exec -C /home/pboling/src/kettle-rb/ast-merge/vendor/token-resolver -- bundle exec rspec
+mise exec -C /home/pboling/src/kettle-rb/token-resolver -- bundle exec rspec
 ```
 
 ## Critical AI Agent Terminal Guidance
@@ -41,25 +41,40 @@ mise exec -C /home/pboling/src/kettle-rb/ast-merge/vendor/token-resolver -- bund
 
 **IMPORTANT**: The canonical project environment now lives in `mise.toml`, with local overrides in `.env.local` loaded via `dotenvy`.
 
-✅ **CORRECT**:
+⚠️ **Watch for trust prompts**: After editing `mise.toml` or `.env.local`, `mise` may require trust to be refreshed before commands can load the project environment. That interactive trust screen can masquerade as missing terminal output, so commands may appear hung or silent until you handle it.
+
+**Recovery rule**: If a `mise exec` command in this repo goes silent, appears hung, or terminal polling stops returning useful output, assume `mise trust` is needed first and recover with:
+
 ```bash
-mise exec -C /home/pboling/src/kettle-rb/ast-merge/vendor/token-resolver -- bundle exec rspec
+mise trust -C /home/pboling/src/kettle-rb/token-resolver
+mise exec -C /home/pboling/src/kettle-rb/token-resolver -- bundle exec rspec
+```
+
+Do this before spending time on unrelated debugging; in this workspace, silent `mise` commands are usually a trust problem.
+
+```bash
+mise trust -C /home/pboling/src/kettle-rb/token-resolver
 ```
 
 ✅ **CORRECT**:
 ```bash
-eval "$(mise env -C /home/pboling/src/kettle-rb/ast-merge/vendor/token-resolver -s bash)" && bundle exec rspec
+mise exec -C /home/pboling/src/kettle-rb/token-resolver -- bundle exec rspec
+```
+
+✅ **CORRECT**:
+```bash
+eval "$(mise env -C /home/pboling/src/kettle-rb/token-resolver -s bash)" && bundle exec rspec
 ```
 
 ❌ **WRONG**:
 ```bash
-cd /home/pboling/src/kettle-rb/ast-merge/vendor/token-resolver
+cd /home/pboling/src/kettle-rb/token-resolver
 bundle exec rspec
 ```
 
 ❌ **WRONG**:
 ```bash
-cd /home/pboling/src/kettle-rb/ast-merge/vendor/token-resolver && bundle exec rspec
+cd /home/pboling/src/kettle-rb/token-resolver && bundle exec rspec
 ```
 
 ### Additional Rules
