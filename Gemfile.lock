@@ -85,7 +85,7 @@ GEM
       prism (>= 1.3.0)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
-    json (2.18.1)
+    json (2.19.2)
     kettle-dev (2.0.0)
     kettle-soup-cover (1.1.1)
       simplecov (~> 0.22)
@@ -385,7 +385,7 @@ CHECKSUMS
   gitmoji-regex (1.0.3) sha256=538c6f49f5af6dc36d1630edb89a5a66f6e14ec5850d7fd071e0331f940e553f
   io-console (0.8.2) sha256=d6e3ae7a7cc7574f4b8893b4fca2162e57a825b223a177b7afa236c5ef9814cc
   irb (1.17.0) sha256=168c4ddb93d8a361a045c41d92b2952c7a118fa73f23fe14e55609eb7a863aae
-  json (2.18.1) sha256=fe112755501b8d0466b5ada6cf50c8c3f41e897fa128ac5d263ec09eedc9f986
+  json (2.19.2) sha256=e7e1bd318b2c37c4ceee2444841c86539bc462e81f40d134cf97826cb14e83cf
   kettle-dev (2.0.0) sha256=f3cd1a2f8cc4f1fcc573d7e9177644873cfdfe455e26365416b4290ea09490b5
   kettle-soup-cover (1.1.1) sha256=2303885a9d8485d8d43cb250bcf73570f6b6fb997526beeaef3ef54e3501d445
   kettle-test (1.0.10) sha256=ddefc5d54b290ee6dbe5a3983128f6948fa63f624ca676c1e6cfffc9b6878179
