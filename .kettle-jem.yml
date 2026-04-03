@@ -114,6 +114,19 @@ licenses:
   - AGPL-3.0-only
   - PolyForm-Small-Business-1.0.0
   - LicenseRef-Big-Time-Public-License
+# Machine / automation accounts to exclude from generated copyright output.
+#
+# When kettle-jem collects copyright information via `git blame`, it filters
+# out known GitHub/GitLab bot accounts automatically.  Use this list to also
+# exclude internal automation accounts that are not bots in the git sense
+# (i.e. they do not follow the "[bot]" naming convention).
+#
+# Each entry is matched case-insensitively against the commit author name AND
+# the commit author email, so you can list either form.
+#
+# Default (when key is absent or empty): ["autobolt"]
+machine_users:
+  - autobolt
 
 # Self-test / templating CI threshold.
 # Set to a number from 0 to 100 to fail `rake kettle:jem:selftest` once

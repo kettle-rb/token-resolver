@@ -7,9 +7,9 @@
 [🖼️kettle-rb-i]: https://logos.galtzo.com/assets/images/kettle-rb/avatar-192px.svg
 [🖼️kettle-rb]: https://github.com/kettle-rb
 
-# 🪙 Token::Resolver
+# 🍲 Token::Resolver
 
-[![Version][👽versioni]][👽dl-rank] [![GitHub tag (latest SemVer)][⛳️tag-img]][⛳️tag] [![License: MIT][📄license-img]][📄license-ref] [![Downloads Rank][👽dl-ranki]][👽dl-rank] [![Open Source Helpers][👽oss-helpi]][👽oss-help] [![CodeCov Test Coverage][🏀codecovi]][🏀codecov] [![Coveralls Test Coverage][🏀coveralls-img]][🏀coveralls] [![QLTY Test Coverage][🏀qlty-covi]][🏀qlty-cov] [![QLTY Maintainability][🏀qlty-mnti]][🏀qlty-mnt] [![CI Heads][🚎3-hd-wfi]][🚎3-hd-wf] [![CI Runtime Dependencies @ HEAD][🚎12-crh-wfi]][🚎12-crh-wf] [![CI Current][🚎11-c-wfi]][🚎11-c-wf] [![CI Truffle Ruby][🚎9-t-wfi]][🚎9-t-wf] [![Deps Locked][🚎13-🔒️-wfi]][🚎13-🔒️-wf] [![Deps Unlocked][🚎14-🔓️-wfi]][🚎14-🔓️-wf] [![CI Supported][🚎6-s-wfi]][🚎6-s-wf] [![CI Test Coverage][🚎2-cov-wfi]][🚎2-cov-wf] [![CI Style][🚎5-st-wfi]][🚎5-st-wf] [![CodeQL][🖐codeQL-img]][🖐codeQL] [![Apache SkyWalking Eyes License Compatibility Check][🚎15-🪪-wfi]][🚎15-🪪-wf]
+[![Version][👽versioni]][👽version] [![GitHub tag (latest SemVer)][⛳️tag-img]][⛳️tag] [![License: MIT][📄license-img]][📄license-ref] [![Downloads Rank][👽dl-ranki]][👽dl-rank] [![Open Source Helpers][👽oss-helpi]][👽oss-help] [![CodeCov Test Coverage][🏀codecovi]][🏀codecov] [![Coveralls Test Coverage][🏀coveralls-img]][🏀coveralls] [![QLTY Test Coverage][🏀qlty-covi]][🏀qlty-cov] [![QLTY Maintainability][🏀qlty-mnti]][🏀qlty-mnt] [![CI Heads][🚎3-hd-wfi]][🚎3-hd-wf] [![CI Runtime Dependencies @ HEAD][🚎12-crh-wfi]][🚎12-crh-wf] [![CI Current][🚎11-c-wfi]][🚎11-c-wf] [![CI Truffle Ruby][🚎9-t-wfi]][🚎9-t-wf] [![CI JRuby][🚎10-j-wfi]][🚎10-j-wf] [![Deps Locked][🚎13-🔒️-wfi]][🚎13-🔒️-wf] [![Deps Unlocked][🚎14-🔓️-wfi]][🚎14-🔓️-wf] [![CI Test Coverage][🚎2-cov-wfi]][🚎2-cov-wf] [![CI Style][🚎5-st-wfi]][🚎5-st-wf] [![CodeQL][🖐codeQL-img]][🖐codeQL] [![Apache SkyWalking Eyes License Compatibility Check][🚎15-🪪-wfi]][🚎15-🪪-wf]
 
 `if ci_badges.map(&:color).detect { it != "green"}` ☝️ [let me know][🖼️galtzo-discord], as I may have missed the [discord notification][🖼️galtzo-discord].
 
@@ -45,10 +45,10 @@ result = Token::Resolver.resolve(
 
 | Tokens to Remember      | [![Gem name][⛳️name-img]][⛳️gem-name] [![Gem namespace][⛳️namespace-img]][⛳️gem-namespace]                                                                                                                                                                                                                                                                          |
 |-------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Works with JRuby        | [![JRuby 10.0 Compat][💎jruby-c-i]][🚎11-c-wf] [![JRuby HEAD Compat][💎jruby-headi]][🚎3-hd-wf]                                                                                                                                                                                                                                                                     |
-| Works with Truffle Ruby | ![Truffle Ruby 23.1 Compat][💎truby-23.1i] ![Truffle Ruby 24.2 Compat][💎truby-24.2i] <br/> [![Truffle Ruby 25.0 Compat][💎truby-25.0i]][🚎9-t-wf] [![Truffle Ruby 33.0 Compat][💎truby-c-i]][🚎11-c-wf]                                                                                                                                                            |
-| Works with MRI Ruby 4   | [![Ruby 4.0 Compat][💎ruby-c-i]][🚎11-c-wf] [![Ruby HEAD Compat][💎ruby-headi]][🚎3-hd-wf]                                                                                                                                                                                                                                                                          |
-| Works with MRI Ruby 3   | [![Ruby 3.2 Compat][💎ruby-3.2i]][🚎6-s-wf] [![Ruby 3.3 Compat][💎ruby-3.3i]][🚎6-s-wf] [![Ruby 3.4 Compat][💎ruby-3.4i]][🚎6-s-wf]                                                                                                                                                                                                                                 |
+| Works with JRuby        | [![JRuby current Compat][💎jruby-c-i]][🚎10-j-wf] [![JRuby HEAD Compat][💎jruby-headi]][🚎3-hd-wf]|
+| Works with Truffle Ruby | [![Truffle Ruby 23.2 Compat][💎truby-23.2i]][🚎truby-23.2-wf] [![Truffle Ruby 24.2 Compat][💎truby-24.2i]][🚎truby-24.2-wf] [![Truffle Ruby 25.0 Compat][💎truby-25.0i]][🚎truby-25.0-wf] [![Truffle Ruby current Compat][💎truby-c-i]][🚎9-t-wf]|
+| Works with MRI Ruby 4   | [![Ruby 4.0 Compat][💎ruby-4.0i]][🚎11-c-wf] [![Ruby current Compat][💎ruby-c-i]][🚎11-c-wf] [![Ruby HEAD Compat][💎ruby-headi]][🚎3-hd-wf]|
+| Works with MRI Ruby 3   | [![Ruby 3.2 Compat][💎ruby-3.2i]][🚎ruby-3.2-wf] [![Ruby 3.3 Compat][💎ruby-3.3i]][🚎ruby-3.3-wf] [![Ruby 3.4 Compat][💎ruby-3.4i]][🚎ruby-3.4-wf]|
 | Support & Community     | [![Join Me on Daily.dev's RubyFriends][✉️ruby-friends-img]][✉️ruby-friends] [![Live Chat on Discord][✉️discord-invite-img-ftb]][✉️discord-invite] [![Get help from me on Upwork][👨🏼‍🏫expsup-upwork-img]][👨🏼‍🏫expsup-upwork] [![Get help from me on Codementor][👨🏼‍🏫expsup-codementor-img]][👨🏼‍🏫expsup-codementor]                                       |
 | Source                  | [![Source on GitLab.com][📜src-gl-img]][📜src-gl] [![Source on CodeBerg.org][📜src-cb-img]][📜src-cb] [![Source on Github.com][📜src-gh-img]][📜src-gh] [![The best SHA: dQw4w9WgXcQ!][🧮kloc-img]][🧮kloc]                                                                                                                                                         |
 | Documentation           | [![Current release on RubyDoc.info][📜docs-cr-rd-img]][🚎yard-current] [![YARD on Galtzo.com][📜docs-head-rd-img]][🚎yard-head] [![Maintainer Blog][🚂maint-blog-img]][🚂maint-blog] [![GitLab Wiki][📜gl-wiki-img]][📜gl-wiki] [![GitHub Wiki][📜gh-wiki-img]][📜gh-wiki]                                                                                          |
@@ -123,11 +123,11 @@ gem install token-resolver
 <details markdown="1">
   <summary>For Medium or High Security Installations</summary>
 
-This gem is cryptographically signed, and has verifiable [SHA-256 and SHA-512][💎SHA_checksums] checksums by
+This gem is cryptographically signed and has verifiable [SHA-256 and SHA-512][💎SHA_checksums] checksums by
 [stone_checksums][💎stone_checksums]. Be sure the gem you install hasn’t been tampered with
 by following the instructions below.
 
-Add my public key (if you haven’t already, expires 2045-04-29) as a trusted certificate:
+Add my public key (if you haven’t already; key expires 2045-04-29) as a trusted certificate:
 
 ```console
 gem cert --add <(curl -Ls https://raw.github.com/galtzo-floss/certs/main/pboling.pem)
@@ -267,60 +267,6 @@ resolver = Token::Resolver::Resolve.new(on_missing: :raise)
 result = resolver.resolve(doc, {"KJ|NAME" => "World"})
 # => "Hello World!"
 ```
-
-## Design
-
-### Grammar Never Fails
-
-The parslet grammar is designed so that **any input is valid**. When the parser encounters
-`{` but it doesn't start a valid token, the `{` is consumed as plain text. No input can
-cause a parse failure.
-
-### Single-Pass Resolution
-
-Replacement values are emitted as-is and are **not** re-scanned for tokens. This prevents
-infinite loops and ensures predictable behavior when replacement values contain token-like strings.
-
-### Performance
-
-If the input doesn't contain the `pre` delimiter at all, the parser fast-paths and returns
-a single Text node without invoking parslet.
-
-#### 📊 Benchmarks
-
-Token-resolver prioritizes **flexibility, configurability, and maintainability** over raw speed.
-
-**⚠️ Important**: Token-resolver is **100-3000x slower** than simple alternatives like `String#gsub` and `Kernel#sprintf`.
-because it does significantly more work:
-- Full PEG parsing of the input string
-- Token validation and structure enforcement
-- Building an AST for introspection
-- Flexible error handling for missing tokens
-
-This performance difference is **expected and acceptable** because these are fundamentally different
-approaches solving different problems.
-
-See [BENCHMARK.md](BENCHMARK.md) for detailed performance comparisons and guidance on:
-
-- **When to use token-resolver**: Configurable token structures, validation, introspection, flexible error handling
-- **When to use String#gsub**: Fixed token patterns, maximum performance, simple one-shot replacements
-- **When to use Kernel#sprintf**: Positional formatting, fixed templates, printf-style output
-
-The choice should be based on your actual requirements, not just raw performance metrics.
-
-To run benchmarks on your system:
-
-```bash
-bundle exec rake bench:comparison
-```
-
-### False Positive Prevention
-
-The grammar constrains segment content to the configured `segment_pattern` (default: word
-characters). This ensures that syntax using the same delimiter characters — such as Ruby
-block parameters (`{ |x| expr }`) or shell variable expansion (`${VAR:+val}`) — is never
-mistakenly parsed as a token. Replacement keys that contain characters outside the
-`segment_pattern` are rejected with an `ArgumentError` at resolve time.
 
 ## 🦷 FLOSS Funding
 
@@ -470,23 +416,23 @@ See [CHANGELOG.md][📌changelog] for a list of releases.
 
 ## 📄 License
 
-The gem is available as open source under the terms of
-the [MIT License][📄license] [![License: MIT][📄license-img]][📄license-ref].
-See [LICENSE.txt][📄license] for the official [Copyright Notice][📄copyright-notice-explainer].
+The gem is available under the following licenses: [AGPL-3.0-only](AGPL-3.0-only.md), [PolyForm-Small-Business-1.0.0](PolyForm-Small-Business-1.0.0.md), [Big-Time-Public-License](Big-Time-Public-License.md).
+See [LICENSE.md][📄license] for details.
+
+If none of the available licenses suit your use case, please [contact us](mailto:floss@glatzo.com) to discuss a custom commercial license.
+
+### License use-case guide
+
+| Use case | License |
+|---|---|
+| Copy-left open source | [AGPL-3.0-only](AGPL-3.0-only.md) |
+| Non-commercial (research, education, personal use) | [PolyForm-Small-Business-1.0.0](PolyForm-Small-Business-1.0.0.md) or [Big-Time-Public-License](Big-Time-Public-License.md) |
+| Small business commercial | [PolyForm-Small-Business-1.0.0](PolyForm-Small-Business-1.0.0.md) or [Big-Time-Public-License](Big-Time-Public-License.md) |
+| Larger business commercial | [Big-Time-Public-License](Big-Time-Public-License.md) or [contact us](mailto:floss@glatzo.com) for a custom license |
 
 ### © Copyright
 
-<ul>
-    <li>
-        Copyright (c) 2026 Peter H. Boling, of
-        <a href="https://discord.gg/3qme4XHNKN">
-            Galtzo.com
-            <picture>
-              <img src="https://logos.galtzo.com/assets/images/galtzo-floss/avatar-128px-blank.svg" alt="Galtzo.com Logo (Wordless) by Aboling0, CC BY-SA 4.0" width="24">
-            </picture>
-        </a>, and token-resolver contributors.
-    </li>
-</ul>
+See [LICENSE.md][📄license] for the official copyright notice.
 
 ## 🤑 A request for help
 
@@ -529,7 +475,7 @@ Thanks for RTFM. ☺️
 [🖇polar-img]: https://img.shields.io/badge/polar-donate-a51611.svg?style=flat
 [🖇polar]: https://polar.sh/pboling
 [🖇kofi-img]: https://img.shields.io/badge/ko--fi-%E2%9C%93-a51611.svg?style=flat
-[🖇kofi]: https://ko-fi.com/O5O86SNP4
+[🖇kofi]: https://ko-fi.com/pboling
 [🖇patreon-img]: https://img.shields.io/badge/patreon-donate-a51611.svg?style=flat
 [🖇patreon]: https://patreon.com/galtzo
 [🖇buyme-small-img]: https://img.shields.io/badge/buy_me_a_coffee-%E2%9C%93-a51611.svg?style=flat
@@ -557,7 +503,7 @@ Thanks for RTFM. ☺️
 [🚂maint-contact]: http://www.railsbling.com/contact
 [🚂maint-contact-img]: https://img.shields.io/badge/Contact-Maintainer-0093D0.svg?style=flat&logo=rubyonrails&logoColor=red
 [💖🖇linkedin]: http://www.linkedin.com/in/peterboling
-[💖🖇linkedin-img]: https://img.shields.io/badge/PeterBoling-LinkedIn-0B66C2?style=flat&logo=newjapanprowrestling
+[💖🖇linkedin-img]: https://img.shields.io/badge/LinkedIn-Profile-0B66C2?style=flat&logo=newjapanprowrestling
 [💖✌️wellfound]: https://wellfound.com/u/peter-boling
 [💖✌️wellfound-img]: https://img.shields.io/badge/peter--boling-orange?style=flat&logo=wellfound
 [💖💲crunchbase]: https://www.crunchbase.com/person/peter-boling
@@ -613,22 +559,18 @@ Thanks for RTFM. ☺️
 [🏀coveralls-img]: https://coveralls.io/repos/github/kettle-rb/token-resolver/badge.svg?branch=main
 [🖐codeQL]: https://github.com/kettle-rb/token-resolver/security/code-scanning
 [🖐codeQL-img]: https://github.com/kettle-rb/token-resolver/actions/workflows/codeql-analysis.yml/badge.svg
-[🚎1-an-wf]: https://github.com/kettle-rb/token-resolver/actions/workflows/ancient.yml
-[🚎1-an-wfi]: https://github.com/kettle-rb/token-resolver/actions/workflows/ancient.yml/badge.svg
+[🚎ruby-3.2-wf]: https://github.com/kettle-rb/token-resolver/actions/workflows/ruby-3.2.yml
+[🚎ruby-3.3-wf]: https://github.com/kettle-rb/token-resolver/actions/workflows/ruby-3.3.yml
+[🚎ruby-3.4-wf]: https://github.com/kettle-rb/token-resolver/actions/workflows/ruby-3.4.yml
+[🚎truby-23.2-wf]: https://github.com/kettle-rb/token-resolver/actions/workflows/truffleruby-23.2.yml
+[🚎truby-24.2-wf]: https://github.com/kettle-rb/token-resolver/actions/workflows/truffleruby-24.2.yml
+[🚎truby-25.0-wf]: https://github.com/kettle-rb/token-resolver/actions/workflows/truffleruby-25.0.yml
 [🚎2-cov-wf]: https://github.com/kettle-rb/token-resolver/actions/workflows/coverage.yml
 [🚎2-cov-wfi]: https://github.com/kettle-rb/token-resolver/actions/workflows/coverage.yml/badge.svg
 [🚎3-hd-wf]: https://github.com/kettle-rb/token-resolver/actions/workflows/heads.yml
 [🚎3-hd-wfi]: https://github.com/kettle-rb/token-resolver/actions/workflows/heads.yml/badge.svg
-[🚎4-lg-wf]: https://github.com/kettle-rb/token-resolver/actions/workflows/legacy.yml
-[🚎4-lg-wfi]: https://github.com/kettle-rb/token-resolver/actions/workflows/legacy.yml/badge.svg
 [🚎5-st-wf]: https://github.com/kettle-rb/token-resolver/actions/workflows/style.yml
 [🚎5-st-wfi]: https://github.com/kettle-rb/token-resolver/actions/workflows/style.yml/badge.svg
-[🚎6-s-wf]: https://github.com/kettle-rb/token-resolver/actions/workflows/supported.yml
-[🚎6-s-wfi]: https://github.com/kettle-rb/token-resolver/actions/workflows/supported.yml/badge.svg
-[🚎7-us-wf]: https://github.com/kettle-rb/token-resolver/actions/workflows/unsupported.yml
-[🚎7-us-wfi]: https://github.com/kettle-rb/token-resolver/actions/workflows/unsupported.yml/badge.svg
-[🚎8-ho-wf]: https://github.com/kettle-rb/token-resolver/actions/workflows/hoary.yml
-[🚎8-ho-wfi]: https://github.com/kettle-rb/token-resolver/actions/workflows/hoary.yml/badge.svg
 [🚎9-t-wf]: https://github.com/kettle-rb/token-resolver/actions/workflows/truffle.yml
 [🚎9-t-wfi]: https://github.com/kettle-rb/token-resolver/actions/workflows/truffle.yml/badge.svg
 [🚎10-j-wf]: https://github.com/kettle-rb/token-resolver/actions/workflows/jruby.yml
@@ -646,13 +588,13 @@ Thanks for RTFM. ☺️
 [💎ruby-3.2i]: https://img.shields.io/badge/Ruby-3.2-CC342D?style=for-the-badge&logo=ruby&logoColor=white
 [💎ruby-3.3i]: https://img.shields.io/badge/Ruby-3.3-CC342D?style=for-the-badge&logo=ruby&logoColor=white
 [💎ruby-3.4i]: https://img.shields.io/badge/Ruby-3.4-CC342D?style=for-the-badge&logo=ruby&logoColor=white
+[💎ruby-4.0i]: https://img.shields.io/badge/Ruby-4.0-CC342D?style=for-the-badge&logo=ruby&logoColor=white
 [💎ruby-c-i]: https://img.shields.io/badge/Ruby-current-CC342D?style=for-the-badge&logo=ruby&logoColor=green
 [💎ruby-headi]: https://img.shields.io/badge/Ruby-HEAD-CC342D?style=for-the-badge&logo=ruby&logoColor=blue
-[💎truby-23.1i]: https://img.shields.io/badge/Truffle_Ruby-23.1_(%F0%9F%9A%ABCI)-AABBCC?style=for-the-badge&logo=ruby&logoColor=pink
-[💎truby-24.2i]: https://img.shields.io/badge/Truffle_Ruby-24.2_(%F0%9F%9A%ABCI)-AABBCC?style=for-the-badge&logo=ruby&logoColor=pink
+[💎truby-23.2i]: https://img.shields.io/badge/Truffle_Ruby-23.2-34BCB1?style=for-the-badge&logo=ruby&logoColor=pink
+[💎truby-24.2i]: https://img.shields.io/badge/Truffle_Ruby-24.2-34BCB1?style=for-the-badge&logo=ruby&logoColor=pink
 [💎truby-25.0i]: https://img.shields.io/badge/Truffle_Ruby-25.0-34BCB1?style=for-the-badge&logo=ruby&logoColor=pink
 [💎truby-c-i]: https://img.shields.io/badge/Truffle_Ruby-current-34BCB1?style=for-the-badge&logo=ruby&logoColor=green
-[💎truby-headi]: https://img.shields.io/badge/Truffle_Ruby-HEAD-34BCB1?style=for-the-badge&logo=ruby&logoColor=blue
 [💎jruby-c-i]: https://img.shields.io/badge/JRuby-current-FBE742?style=for-the-badge&logo=ruby&logoColor=green
 [💎jruby-headi]: https://img.shields.io/badge/JRuby-HEAD-FBE742?style=for-the-badge&logo=ruby&logoColor=blue
 [🤝gh-issues]: https://github.com/kettle-rb/token-resolver/issues
@@ -681,13 +623,11 @@ Thanks for RTFM. ☺️
 [📌gitmoji]: https://gitmoji.dev
 [📌gitmoji-img]: https://img.shields.io/badge/gitmoji_commits-%20%F0%9F%98%9C%20%F0%9F%98%8D-34495e.svg?style=flat-square
 [🧮kloc]: https://www.youtube.com/watch?v=dQw4w9WgXcQ
-[🧮kloc-img]: https://img.shields.io/badge/KLOC-0.268-FFDD67.svg?style=for-the-badge&logo=YouTube&logoColor=blue
+[🧮kloc-img]: https://img.shields.io/badge/KLOC-5.053-FFDD67.svg?style=for-the-badge&logo=YouTube&logoColor=blue
 [🔐security]: SECURITY.md
 [🔐security-img]: https://img.shields.io/badge/security-policy-259D6C.svg?style=flat
 [📄copyright-notice-explainer]: https://opensource.stackexchange.com/questions/5778/why-do-licenses-such-as-the-mit-license-specify-a-single-year
-[📄license]: LICENSE.txt
-[📄license-ref]: https://opensource.org/licenses/MIT
-[📄license-img]: https://img.shields.io/badge/License-MIT-259D6C.svg
+[📄license]: LICENSE.md
 [📄license-compat]: https://dev.to/galtzo/how-to-check-license-compatibility-41h0
 [📄license-compat-img]: https://img.shields.io/badge/Apache_Compatible:_Category_A-%E2%9C%93-259D6C.svg?style=flat&logo=Apache
 [📄ilo-declaration]: https://www.ilo.org/declaration/lang--en/index.htm
