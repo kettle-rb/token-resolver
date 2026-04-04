@@ -112,6 +112,8 @@ readme:
 #     are all present, a use-case guide table is added to README and LICENSE.md.
 licenses:
   - AGPL-3.0-only
+  - PolyForm-Small-Business-1.0.0
+  - LicenseRef-Big-Time-Public-License
 
 # Machine / automation accounts to exclude from generated copyright output.
 #
@@ -190,26 +192,6 @@ patterns:
 files:
   AGENTS.md:
     strategy: accept_template
-
-# To override specific files, add entries like:
-#
-# files:
-#   README.md:
-#     strategy: accept_template
-#
-#   SECURITY.md:
-#     strategy: keep_destination
-#
-#   certs:
-#     pboling.pem:
-#       strategy: raw_copy
-#
-#   .git-hooks:
-#     commit-msg:
-#       strategy: merge
-#       file_type: ruby
-#
-#   Rakefile:
-#     strategy: merge
-#     preference: destination
-#     add_template_only_nodes: false
+  token-resolver.gemspec:
+    strategy: merge
+    skip_unresolved_scan: true
