@@ -114,6 +114,7 @@ licenses:
   - AGPL-3.0-only
   - PolyForm-Small-Business-1.0.0
   - LicenseRef-Big-Time-Public-License
+
 # Machine / automation accounts to exclude from generated copyright output.
 #
 # When kettle-jem collects copyright information via `git blame`, it filters
