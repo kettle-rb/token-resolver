@@ -13,8 +13,8 @@ Gem::Specification.new do |spec|
   spec.authors = ["Peter H. Boling"]
   spec.email = ["floss@galtzo.com"]
 
-  spec.summary = "🪙 Configurable PEG-based token parser and resolver for structured token detection and replacement in arbitrary text"
-  spec.description = "🪙 Token::Resolver provides configurable PEG-based (parslet) parsing and resolution of structured tokens (e.g., {KJ|GEM_NAME}) in arbitrary text. Useful for template ETL pipelines where tokens in template files must be resolved before format-specific merging."
+  spec.summary = "🍲 Configurable PEG-based token parser and resolver for structured token detection and replacement in arbitrary text"
+  spec.description = "🍲 Token::Resolver provides configurable PEG-based (parslet) parsing and resolution of structured tokens (e.g., {KJ|GEM_NAME}) in arbitrary text. Useful for template ETL pipelines where tokens in template files must be resolved before format-specific merging."
   spec.homepage = "https://github.com/kettle-rb/token-resolver"
   spec.licenses = ["AGPL-3.0-only"]
   spec.required_ruby_version = ">= 3.2.0"
