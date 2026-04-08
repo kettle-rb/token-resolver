@@ -1,6 +1,5 @@
 # Shared development environment for token-resolver.
 # Local overrides belong in .env.local (loaded via dotenvy through mise).
-
 [env]
 DEBUG = "false"
 FLOSS_CFG_FUND_DEBUG = "false"
