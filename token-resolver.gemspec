@@ -7,25 +7,9 @@
 # token-resolver will then preserve content between those markers across template runs.
 # kettle-jem:unfreeze
 
-gem_version =
-  if Gem.ruby_version >= Gem::Version.new("3.1")
-    # Loading Version into an anonymous module allows version.rb to get code coverage from SimpleCov!
-    # See: https://github.com/simplecov-ruby/simplecov/issues/557#issuecomment-2630782358
-    # See: https://github.com/panorama-ed/memo_wise/pull/397
-    Module.new.tap { |mod| Kernel.load("#{__dir__}/lib/token/resolver/version.rb", mod) }::Token::Resolver::Version::VERSION
-  else
-    # NOTE: Use __FILE__ or __dir__ until removal of Ruby 1.x support
-    # __dir__ introduced in Ruby 1.9.1
-    # lib = File.expand_path("../lib", __FILE__)
-    lib = File.expand_path("lib", __dir__)
-    $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-    require "token/resolver/version"
-    Token::Resolver::Version::VERSION
-  end
-
 Gem::Specification.new do |spec|
   spec.name = "token-resolver"
-  spec.version = gem_version
+  spec.version = Module.new.tap { |mod| Kernel.load("#{__dir__}/lib/token/resolver/version.rb", mod) }::Token::Resolver::Version::VERSION
   spec.authors = ["Peter H. Boling"]
   spec.email = ["floss@galtzo.com"]
 
@@ -33,7 +17,7 @@ Gem::Specification.new do |spec|
   spec.description = "🪙 Token::Resolver provides configurable PEG-based (parslet) parsing and resolution of structured tokens (e.g., {KJ|GEM_NAME}) in arbitrary text. Useful for template ETL pipelines where tokens in template files must be resolved before format-specific merging."
   spec.homepage = "https://github.com/kettle-rb/token-resolver"
   spec.licenses = ["AGPL-3.0-only", "PolyForm-Small-Business-1.0.0"]
-  spec.required_ruby_version = ">= 2.4"
+  spec.required_ruby_version = ">= 3.2.0"
 
   # Linux distros often package gems and securely certify them independent
   #   of the official RubyGem certification process. Allowed via ENV["SKIP_GEM_SIGNING"]
@@ -119,11 +103,11 @@ Gem::Specification.new do |spec|
   #       visibility and discoverability.
   #       However, development dependencies in gemspec will install on
   #       all versions of Ruby that will run in CI.
-  #       This gem, and its gemspec runtime dependencies, will install on Ruby down to 2.4.
-  #       This gem, and its gemspec development dependencies, will install on Ruby down to 2.4.
+  #       This gem, and its gemspec runtime dependencies, will install on Ruby down to 3.2.0.
+  #       This gem, and its gemspec development dependencies, will install on Ruby down to 3.2.0.
   #       Thus, dev dependencies in gemspec must have
   #
-  #       required_ruby_version ">= 2.4" (or lower)
+  #       required_ruby_version ">= 3.2.0" (or lower)
   #
   #       Development dependencies that require strictly newer Ruby versions should be in a "gemfile",
   #       and preferably a modular one (see gemfiles/modular/*.gemfile).
