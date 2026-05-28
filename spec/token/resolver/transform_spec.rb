@@ -41,6 +41,60 @@ RSpec.describe Token::Resolver::Transform do
       expect(nodes[0].segments).to eq(["KJ", "NAME"])
     end
 
+    it "converts hash token entries with a single captured segment" do
+      tree = [
+        {token: {seg: Parslet::Slice.new(Parslet::Position.new("KJ", 0), "KJ")}},
+      ]
+
+      nodes = described_class.apply(tree, config)
+
+      expect(nodes.length).to eq(1)
+      expect(nodes[0]).to be_a(Token::Resolver::Node::Token)
+      expect(nodes[0].segments).to eq(["KJ"])
+    end
+
+    it "converts array token entries containing raw captures" do
+      tree = [
+        {
+          token: [
+            {seg: Parslet::Slice.new(Parslet::Position.new("KJ", 0), "KJ")},
+            Parslet::Slice.new(Parslet::Position.new("NAME", 0), "NAME"),
+          ],
+        },
+      ]
+
+      nodes = described_class.apply(tree, config)
+
+      expect(nodes.length).to eq(1)
+      expect(nodes[0]).to be_a(Token::Resolver::Node::Token)
+      expect(nodes[0].segments).to eq(["KJ", "NAME"])
+    end
+
+    it "converts raw token captures to Token nodes" do
+      tree = [
+        {token: Parslet::Slice.new(Parslet::Position.new("KJ", 0), "KJ")},
+      ]
+
+      nodes = described_class.apply(tree, config)
+
+      expect(nodes.length).to eq(1)
+      expect(nodes[0]).to be_a(Token::Resolver::Node::Token)
+      expect(nodes[0].segments).to eq(["KJ"])
+    end
+
+    it "converts unknown entries to Text nodes" do
+      tree = [
+        {other: "value"},
+      ]
+
+      nodes = described_class.apply(tree, config)
+
+      expect(nodes.length).to eq(1)
+      expect(nodes[0]).to be_a(Token::Resolver::Node::Text)
+      expect(nodes[0].content).to include("other")
+      expect(nodes[0].content).to include("value")
+    end
+
     it "handles mixed text and token entries" do
       tree = [
         {text: Parslet::Slice.new(Parslet::Position.new("A", 0), "A")},

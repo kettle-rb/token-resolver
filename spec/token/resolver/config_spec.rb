@@ -148,6 +148,10 @@ RSpec.describe Token::Resolver::Config do
       expect(a).not_to eql(b)
     end
 
+    it "does not equal unrelated objects" do
+      expect(described_class.new).not_to eql(Object.new)
+    end
+
     it "works as a Hash key" do
       a = described_class.new
       b = described_class.new

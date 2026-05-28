@@ -106,6 +106,22 @@ RSpec.describe Token::Resolver::Document do
       expect(doc.nodes[0]).to be_a(Token::Resolver::Node::Text)
       expect(doc.text_only?).to be true
     end
+
+    it "falls back to text when parslet cannot parse input" do
+      parser_class = Class.new do
+        def parse(_input)
+          raise Parslet::ParseFailed, "parse failed"
+        end
+      end
+
+      allow(Token::Resolver::Grammar).to receive(:build).and_return(parser_class)
+
+      doc = described_class.new("{KJ|NAME}", config: config)
+
+      expect(doc.nodes.length).to eq(1)
+      expect(doc.nodes[0]).to be_a(Token::Resolver::Node::Text)
+      expect(doc.to_s).to eq("{KJ|NAME}")
+    end
   end
 
   describe "with custom config" do

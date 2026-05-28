@@ -129,6 +129,25 @@ RSpec.describe Token::Resolver::Resolve do
         result = resolver.resolve(nodes, {"KJ|NAME" => "World"})
         expect(result).to eq("Hi World")
       end
+
+      it "treats false replacement values as missing" do
+        nodes = [
+          Token::Resolver::Node::Token.new(["KJ", "FLAG"], config),
+        ]
+        result = described_class.new(on_missing: :keep).resolve(nodes, {"KJ|FLAG" => false})
+
+        expect(result).to eq("{KJ|FLAG}")
+      end
+
+      it "emits nothing for an unsupported internal missing policy" do
+        resolver = described_class.allocate
+        resolver.instance_variable_set(:@on_missing, :unsupported)
+        nodes = [
+          Token::Resolver::Node::Token.new(["KJ", "FLAG"], config),
+        ]
+
+        expect(resolver.resolve(nodes, {})).to eq("")
+      end
     end
 
     context "with invalid input" do
@@ -171,6 +190,13 @@ RSpec.describe Token::Resolver::Resolve do
         nodes = [Token::Resolver::Node::Text.new("hi")]
         expect {
           resolver.resolve(nodes, {" bad|key" => "x"})
+        }.not_to raise_error
+      end
+
+      it "accepts empty replacements without key validation" do
+        doc = Token::Resolver::Document.new("hello", config: config)
+        expect {
+          resolver.resolve(doc, {})
         }.not_to raise_error
       end
     end
