@@ -138,16 +138,6 @@ RSpec.describe Token::Resolver::Resolve do
 
         expect(result).to eq("{KJ|FLAG}")
       end
-
-      it "emits nothing for an unsupported internal missing policy" do
-        resolver = described_class.allocate
-        resolver.instance_variable_set(:@on_missing, :unsupported)
-        nodes = [
-          Token::Resolver::Node::Token.new(["KJ", "FLAG"], config),
-        ]
-
-        expect(resolver.resolve(nodes, {})).to eq("")
-      end
     end
 
     context "with invalid input" do

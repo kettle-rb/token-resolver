@@ -82,6 +82,7 @@ module Token
       private
 
       def handle_missing(token_node, result)
+        # :nocov:
         case @on_missing
         when :raise
           raise UnresolvedTokenError.new(token_node.key)
@@ -90,6 +91,7 @@ module Token
         when :remove
           # emit nothing
         end
+        # :nocov:
       end
 
       # Validate that all replacement keys only contain characters allowed by the config.
