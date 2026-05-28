@@ -3,7 +3,7 @@
 module Token
   module Resolver
     module Version
-      VERSION = "1.0.2"
+      VERSION = "2.0.0"
     end
     VERSION = Version::VERSION # Traditional Constant Location
   end

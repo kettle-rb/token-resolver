@@ -6,13 +6,13 @@
 <title>
   File: BENCHMARK
   
-    &mdash; Documentation by YARD 0.9.38
+    &mdash; Documentation by YARD 0.9.44
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" />
+  <link rel="stylesheet" href="css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" />
+  <link rel="stylesheet" href="css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "BENCHMARK";
@@ -27,6 +27,8 @@
 
   </head>
   <body>
+    <div id="main_progress" aria-hidden="true"></div>
+
     <div class="nav_wrap">
       <iframe id="nav" src="file_list.html?1"></iframe>
       <div id="resizer"></div>
@@ -172,8 +174,8 @@ The performance differences reflect this - token-resolver does more work than th
   </tbody>
 </table>
 
-<p><strong>Comparison</strong>: <code>String#gsub</code> is <strong>312x slower</strong> than <code>token-resolver</code>.<br>
-<strong>Comparison</strong>: <code>Kernel#sprintf</code> is <strong>1894x slower</strong> than <code>token-resolver</code>.</p>
+<p><strong>Comparison</strong>: <code>token-resolver</code> is <strong>312x slower</strong> than <code>String#gsub</code>.<br>
+<strong>Comparison</strong>: <code>token-resolver</code> is <strong>1894x slower</strong> than <code>Kernel#sprintf</code>.</p>
 
 <h3 id="2-moderate-complexity-7-tokens">2. Moderate Complexity (7 tokens)</h3>
 
@@ -217,8 +219,8 @@ The performance differences reflect this - token-resolver does more work than th
   </tbody>
 </table>
 
-<p><strong>Comparison</strong>: <code>String#gsub</code> is <strong>323x slower</strong> than <code>token-resolver</code>.<br>
-<strong>Comparison</strong>: <code>Kernel#sprintf</code> is <strong>2701x slower</strong> than <code>token-resolver</code>.</p>
+<p><strong>Comparison</strong>: <code>token-resolver</code> is <strong>323x slower</strong> than <code>String#gsub</code>.<br>
+<strong>Comparison</strong>: <code>token-resolver</code> is <strong>2701x slower</strong> than <code>Kernel#sprintf</code>.</p>
 
 <h3 id="3-high-complexity-20-tokens">3. High Complexity (20 tokens)</h3>
 
@@ -262,8 +264,8 @@ The performance differences reflect this - token-resolver does more work than th
   </tbody>
 </table>
 
-<p><strong>Comparison</strong>: <code>String#gsub</code> is <strong>214x slower</strong> than <code>token-resolver</code>.<br>
-<strong>Comparison</strong>: <code>Kernel#sprintf</code> is <strong>2301x slower</strong> than <code>token-resolver</code>.</p>
+<p><strong>Comparison</strong>: <code>token-resolver</code> is <strong>214x slower</strong> than <code>String#gsub</code>.<br>
+<strong>Comparison</strong>: <code>token-resolver</code> is <strong>2301x slower</strong> than <code>Kernel#sprintf</code>.</p>
 
 <h3 id="4-large-document-with-sparse-tokens-5-tokens-in-1kb-text">4. Large Document with Sparse Tokens (5 tokens in 1KB text)</h3>
 
@@ -302,7 +304,7 @@ The performance differences reflect this - token-resolver does more work than th
   </tbody>
 </table>
 
-<p><strong>Comparison</strong>: <code>String#gsub</code> is <strong>3254x slower</strong> than <code>token-resolver</code>.</p>
+<p><strong>Comparison</strong>: <code>token-resolver</code> is <strong>3254x slower</strong> than <code>String#gsub</code>.</p>
 
 <h2 id="analysis--recommendations">Analysis &amp; Recommendations</h2>
 
@@ -417,9 +419,9 @@ bundle exec ruby benchmarks/comparison.rb
 </div></div>
 
       <div id="footer">
-  Generated on Sun Feb 22 04:53:53 2026 by
+  Generated on Wed May 27 18:43:25 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.38 (ruby-4.0.1).
+  0.9.44 (ruby-4.0.5).
 </div>
 
     </div>

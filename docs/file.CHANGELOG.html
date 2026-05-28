@@ -6,13 +6,13 @@
 <title>
   File: CHANGELOG
   
-    &mdash; Documentation by YARD 0.9.38
+    &mdash; Documentation by YARD 0.9.44
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" />
+  <link rel="stylesheet" href="css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" />
+  <link rel="stylesheet" href="css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "CHANGELOG";
@@ -27,6 +27,8 @@
 
   </head>
   <body>
+    <div id="main_progress" aria-hidden="true"></div>
+
     <div class="nav_wrap">
       <iframe id="nav" src="file_list.html?1"></iframe>
       <div id="resizer"></div>
@@ -68,7 +70,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 and <a href="https://tom.preston-werner.com/2022/05/23/major-version-numbers-are-not-sacred.html">yes</a>, platform and engine support are part of the <a href="https://github.com/semver/semver/issues/716#issuecomment-869336139">public API</a>.<br>
 Please file a bug if you notice a violation of semantic versioning.</p>
 
-<h2 id="unreleased"><a href="https://github.com/kettle-rb/token-resolver/compare/v1.0.2...HEAD">Unreleased</a></h2>
+<h2 id="unreleased"><a href="https://github.com/kettle-rb/token-resolver/compare/v2.0.0...HEAD">Unreleased</a></h2>
 
 <h3 id="added">Added</h3>
 
@@ -82,6 +84,117 @@ Please file a bug if you notice a violation of semantic versioning.</p>
 
 <h3 id="security">Security</h3>
 
+<h2 id="200---2026-05-27">
+<a href="https://github.com/kettle-rb/token-resolver/compare/v1.0.2...v2.0.0">2.0.0</a> - 2026-05-27</h2>
+
+<ul>
+  <li>TAG: <a href="https://github.com/kettle-rb/token-resolver/releases/tag/v2.0.0">v2.0.0</a>
+</li>
+  <li>COVERAGE: 98.13% – 263/268 lines in 10 files</li>
+  <li>BRANCH COVERAGE: 91.18% – 62/68 branches in 10 files</li>
+  <li>93.55% documented</li>
+</ul>
+
+<h3 id="added-1">Added</h3>
+
+<ul>
+  <li>
+<strong>New CI workflows</strong> — Expanded Ruby/engine matrix coverage:
+    <ul>
+      <li>
+<code>jruby.yml</code> — JRuby CI workflow</li>
+      <li>
+<code>ruby-3.4.yml</code> — Ruby 3.4 CI workflow</li>
+      <li>
+<code>templating.yml</code> — Templating CI workflow</li>
+      <li>
+<code>truffleruby-23.1.yml</code>, <code>truffleruby-23.2.yml</code>, <code>truffleruby-24.2.yml</code>, <code>truffleruby-25.0.yml</code> — TruffleRuby version-pinned CI workflows</li>
+      <li>Renamed <code>legacy.yml</code> → <code>ruby-3.2.yml</code> and <code>supported.yml</code> → <code>ruby-3.3.yml</code> for consistency</li>
+    </ul>
+  </li>
+  <li>
+<strong>Dev binaries</strong> — New developer/tooling scripts in <code>bin/</code>: <code>ast-merge-recipe</code>, <code>kettle-gh-release</code>, <code>kettle-jem</code>, <code>print_matches</code>, <code>rbts</code>, <code>unparser</code>
+</li>
+  <li>
+<strong>Modular gemfiles</strong> — Added <code>coverage_local.gemfile</code>, <code>style_local.gemfile</code>, <code>templating.gemfile</code>, <code>templating_local.gemfile</code>, and recording gemfiles for local-path sibling gem development</li>
+  <li>
+<strong>Dev container setup</strong> — Added <code>devcontainer/scripts/setup-tree-sitter.sh</code> for Tree-sitter native library installation</li>
+  <li>
+<strong>mise environment management</strong> — Added <code>mise.toml</code> for ENV-driven local development configuration; migrated from <code>.envrc</code>-only approach to mise + dotenvy</li>
+  <li>
+<strong>Template freeze markers</strong> — Added <code>kettle-jem:freeze</code> / <code>kettle-jem:unfreeze</code> markers in <code>token-resolver.gemspec</code> to preserve custom sections across template runs</li>
+  <li>
+<strong><code>.gemrc</code></strong> — Added project-level gem configuration file</li>
+  <li>
+<strong><code>.rubocop_rspec.yml</code></strong> — Added RSpec-specific RuboCop configuration</li>
+  <li>
+<strong>GitHub Copilot instructions</strong> — Added <code>.github/COPILOT_INSTRUCTIONS.md</code>
+</li>
+  <li>
+<strong>License texts</strong> — Added <code>AGPL-3.0-only.md</code> and <code>PolyForm-Small-Business-1.0.0.md</code>
+</li>
+</ul>
+
+<h3 id="changed-1">Changed</h3>
+
+<ul>
+  <li>
+<strong>BREAKING: License changed from MIT to AGPL-3.0-only OR PolyForm-Small-Business-1.0.0</strong> — <code>spec.licenses</code> updated in gemspec; license files, README badges, and compatibility metadata updated accordingly</li>
+  <li>
+<strong><code>kettle-dev</code></strong> development dependency bumped from <code>~&gt; 1.2</code> to <code>~&gt; 2.0</code>
+</li>
+  <li>
+<strong><code>bundler-audit</code></strong> development dependency bumped from <code>~&gt; 0.9.2</code> to <code>~&gt; 0.9.3</code>
+</li>
+  <li>
+<strong><code>appraisal2</code></strong> version constraint loosened from <code>~&gt; 3.0, ~&gt; 3.0.6</code> to <code>~&gt; 3.0, &gt;= 3.0.6</code>
+</li>
+  <li>
+<strong>Local dev wiring</strong> — Switched from ad hoc monorepo paths to <code>nomono</code> Gemfile macros for sibling gem resolution in <code>style.gemfile</code> and related local gemfiles</li>
+  <li>
+<strong>Template dependency</strong> — Updated from <code>jsonc-merge</code> to <code>json-merge</code> in <code>templating_local.gemfile</code>
+</li>
+  <li>
+<strong>Gemspec <code>homepage_uri</code></strong> — Hardcoded to <code>https://token-resolver.galtzo.com/</code> (was dynamically constructed with <code>tr</code>)</li>
+  <li>
+<strong>Skip unresolved-token scan for gemspec</strong> — Added <code>.kettle-jem.yml</code> config to exclude <code>token-resolver.gemspec</code> from the token scan</li>
+  <li>
+<strong>CI: <code>codecov/codecov-action</code></strong> bumped from v5 to v6</li>
+  <li>
+<strong>CI: <code>marocchino/sticky-pull-request-comment</code></strong> bumped from v2 to v3</li>
+  <li>
+<strong>CI: <code>addressable</code></strong> (transitive dependency) bumped from 2.8.8 to 2.8.9</li>
+  <li>
+<strong>CI: <code>json</code></strong> (bundler group) bumped from 2.18.1 to 2.19.2</li>
+  <li>
+<strong>Dev container</strong> — Updated <code>devcontainer.json</code> and <code>apt-install</code> scripts with improved tooling setup</li>
+</ul>
+
+<h3 id="removed-1">Removed</h3>
+
+<ul>
+  <li>
+<strong><code>LICENSE.txt</code></strong> — Replaced by <code>LICENSE.md</code>, <code>AGPL-3.0-only.md</code>, and <code>PolyForm-Small-Business-1.0.0.md</code>
+</li>
+  <li>
+<strong>Previous license options not included in the new dual-license set</strong> — Removed retired license files such as <code>Big-Time-Public-License.md</code>
+</li>
+</ul>
+
+<h3 id="fixed-1">Fixed</h3>
+
+<ul>
+  <li>
+<strong>Typos</strong> — Minor documentation/comment typo corrections in <code>BENCHMARK.md</code> and IDE configuration</li>
+</ul>
+
+<h3 id="security-1">Security</h3>
+
+<ul>
+  <li>
+<strong><code>bundler-audit</code> ~&gt; 0.9.3`</strong> — Picked up latest security-advisory database and patch-level fixes</li>
+</ul>
+
 <h2 id="102---2026-02-22">
 <a href="https://github.com/kettle-rb/token-resolver/compare/v1.0.1...v1.0.2">1.0.2</a> - 2026-02-22</h2>
 
@@ -93,7 +206,7 @@ Please file a bug if you notice a violation of semantic versioning.</p>
   <li>96.77% documented</li>
 </ul>
 
-<h3 id="added-1">Added</h3>
+<h3 id="added-2">Added</h3>
 
 <ul>
   <li>
@@ -127,7 +240,7 @@ and real-world performance context</li>
   <li>96.77% documented</li>
 </ul>
 
-<h3 id="added-2">Added</h3>
+<h3 id="added-3">Added</h3>
 
 <ul>
   <li>
@@ -141,7 +254,7 @@ or punctuation in the “segments”.</li>
 raises <code>ArgumentError</code> if a key contains characters that the grammar would never parse.</li>
 </ul>
 
-<h3 id="fixed-1">Fixed</h3>
+<h3 id="fixed-2">Fixed</h3>
 
 <ul>
   <li>
@@ -165,20 +278,20 @@ roundtripping, silently corrupting source files. The grammar now uses<br>
   <li>96.72% documented</li>
 </ul>
 
-<h3 id="added-3">Added</h3>
+<h3 id="added-4">Added</h3>
 
 <ul>
   <li>Initial release</li>
 </ul>
 
-<h3 id="security-1">Security</h3>
+<h3 id="security-2">Security</h3>
 
 </div></div>
 
       <div id="footer">
-  Generated on Sun Feb 22 04:53:53 2026 by
+  Generated on Wed May 27 18:43:25 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.38 (ruby-4.0.1).
+  0.9.44 (ruby-4.0.5).
 </div>
 
     </div>
