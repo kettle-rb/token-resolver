@@ -28,6 +28,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+- Fixed generated documentation URLs that incorrectly pointed at a monorepo
+  `gems/token-resolver` path.
+
 ### Security
 
 ## [2.0.0] - 2026-05-27
