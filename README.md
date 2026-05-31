@@ -396,7 +396,7 @@ Thanks for RTFM. ☺️
 [✉️ruby-friends]: https://app.daily.dev/squads/rubyfriends
 
 [✇bundle-group-pattern]: https://gist.github.com/pboling/4564780
-[⛳️gem-namespace]: https://github.com/kettle-rb/token-resolver/tree/main/gems/token-resolver
+[⛳️gem-namespace]: https://github.com/kettle-rb/token-resolver
 [⛳️namespace-img]: https://img.shields.io/badge/namespace-Token::Resolver-3C2D2D.svg?style=square&logo=ruby&logoColor=white
 [⛳️gem-name]: https://bestgems.org/gems/token-resolver
 [⛳️name-img]: https://img.shields.io/badge/name-token--resolver-3C2D2D.svg?style=square&logo=rubygems&logoColor=red
@@ -436,11 +436,11 @@ Thanks for RTFM. ☺️
 [💁🏼‍♂️peterboling]: http://www.peterboling.com
 [🚂railsbling]: http://www.railsbling.com
 [📜src-gl-img]: https://img.shields.io/badge/GitLab-FBA326?style=for-the-badge&logo=Gitlab&logoColor=orange
-[📜src-gl]: https://gitlab.com/kettle-rb/token-resolver/-/tree/main/gems/token-resolver
+[📜src-gl]: https://gitlab.com/kettle-rb/token-resolver
 [📜src-cb-img]: https://img.shields.io/badge/CodeBerg-4893CC?style=for-the-badge&logo=CodeBerg&logoColor=blue
-[📜src-cb]: https://codeberg.org/kettle-rb/token-resolver/src/branch/main/gems/token-resolver
+[📜src-cb]: https://codeberg.org/kettle-rb/token-resolver
 [📜src-gh-img]: https://img.shields.io/badge/GitHub-238636?style=for-the-badge&logo=Github&logoColor=green
-[📜src-gh]: https://github.com/kettle-rb/token-resolver/tree/main/gems/token-resolver
+[📜src-gh]: https://github.com/kettle-rb/token-resolver
 [📜docs-cr-rd-img]: https://img.shields.io/badge/RubyDoc-Current_Release-943CD2?style=for-the-badge&logo=readthedocs&logoColor=white
 [📜docs-head-rd-img]: https://img.shields.io/badge/YARD_on_Galtzo.com-HEAD-943CD2?style=for-the-badge&logo=readthedocs&logoColor=white
 [📜gl-wiki]: https://gitlab.com/kettle-rb/token-resolver/-/wikis/home

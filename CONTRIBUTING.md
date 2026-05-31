@@ -233,9 +233,9 @@ NOTE: To build without signing the gem set `SKIP_GEM_SIGNING` to any value in th
 14. Run `bundle exec rake release` which will create a git tag for the version,
     push git commits and tags, and push the `.gem` file to the gem host configured in the gemspec.
 
-[📜src-gl]: https://gitlab.com/kettle-rb/token-resolver/-/tree/main/gems/token-resolver
-[📜src-cb]: https://codeberg.org/kettle-rb/token-resolver/src/branch/main/gems/token-resolver
-[📜src-gh]: https://github.com/kettle-rb/token-resolver/tree/main/gems/token-resolver
+[📜src-gl]: https://gitlab.com/kettle-rb/token-resolver
+[📜src-cb]: https://codeberg.org/kettle-rb/token-resolver
+[📜src-gh]: https://github.com/kettle-rb/token-resolver
 [🧪build]: https://github.com/kettle-rb/token-resolver/actions
 [🤝conduct]: https://github.com/kettle-rb/token-resolver/blob/main/CODE_OF_CONDUCT.md
 [🖐contrib-rocks]: https://contrib.rocks
