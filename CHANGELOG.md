@@ -28,10 +28,19 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+### Security
+
+## [2.0.2] - 2026-06-10
+
+- TAG: [v2.0.2][2.0.2t]
+- COVERAGE: 100.00% -- 265/265 lines in 10 files
+- BRANCH COVERAGE: 100.00% -- 64/64 branches in 10 files
+- 93.55% documented
+
+### Fixed
+
 - Updated generated project metadata links to use the migrated `kettle-dev`
   GitHub organization.
-
-### Security
 
 ## [2.0.1] - 2026-05-31
 
@@ -171,7 +180,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Security
 
-[Unreleased]: https://github.com/kettle-rb/token-resolver/compare/v2.0.1...HEAD
+[Unreleased]: https://github.com/kettle-dev/token-resolver/compare/v2.0.2...HEAD
+[2.0.2]: https://github.com/kettle-dev/token-resolver/compare/v2.0.1...v2.0.2
+[2.0.2t]: https://github.com/kettle-dev/token-resolver/releases/tag/v2.0.2
 [2.0.1]: https://github.com/kettle-rb/token-resolver/compare/v2.0.0...v2.0.1
 [2.0.1t]: https://github.com/kettle-rb/token-resolver/releases/tag/v2.0.1
 [2.0.0]: https://github.com/kettle-rb/token-resolver/compare/v1.0.2...v2.0.0
