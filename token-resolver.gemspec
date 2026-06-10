@@ -93,11 +93,11 @@ Gem::Specification.new do |spec|
   # Listed files are the relative paths from bindir above.
   spec.executables = []
 
-# kettle-jem:freeze
-# To retain chunks of comments & code during token-resolver templating:
-# Wrap custom sections with freeze markers (e.g., as above and below this comment chunk).
-# token-resolver will then preserve content between those markers across template runs.
-# kettle-jem:unfreeze
+  # kettle-jem:freeze
+  # To retain chunks of comments & code during token-resolver templating:
+  # Wrap custom sections with freeze markers (e.g., as above and below this comment chunk).
+  # token-resolver will then preserve content between those markers across template runs.
+  # kettle-jem:unfreeze
 
   spec.require_paths = ["lib"]
 
@@ -119,7 +119,7 @@ Gem::Specification.new do |spec|
   #       and preferably a modular one (see gemfiles/modular/*.gemfile).
 
   # Dev, Test, & Release Tasks
-  spec.add_development_dependency("kettle-dev", "~> 2.2", ">= 2.2.1")      # ruby >= 3.2.0
+  spec.add_development_dependency("kettle-dev", "~> 2.2", ">= 2.2.3")      # ruby >= 3.2.0
 
   # Security
   spec.add_development_dependency("bundler-audit", "~> 0.9.3")                      # ruby >= 2.0.0
@@ -132,7 +132,7 @@ Gem::Specification.new do |spec|
 
   # Testing
   spec.add_development_dependency("appraisal2", "~> 3.1", ">= 3.1.1")               # ruby >= 1.8.7, for testing against multiple versions of dependencies
-  spec.add_development_dependency("kettle-test", "~> 2.0", ">= 2.0.4")             # ruby >= 3.2.0
+  spec.add_development_dependency("kettle-test", "~> 2.0", ">= 2.0.5")             # ruby >= 3.2.0
   spec.add_development_dependency("turbo_tests2", "~> 3.1", ">= 3.1.2")            # ruby >= 2.4.0, default kettle-test runner
 
   # Releasing
